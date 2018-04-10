@@ -183,7 +183,7 @@ US East (N. Virginia) | [![Launch Module 1 in us-east-1](http://docs.aws.amazon.
 デフォルトでは、S3バケットのオブジェクトは、`http://<Regional-S3-prefix>.amazonaws.com/<bucket-name>/<object-key>`の構造を持つURLとして利用できます。アセットをルートURL (例えば /index.html) として配信するには、バケットの Web サイトホスティングを有効にする必要があります。これにより、バケットのAWSリージョン固有のWeb サイトエンドポイントでオブジェクトを利用できるようになります:
 `<bucket-name>.s3-website-<AWS-region>.amazonaws.com`
 
-あなたのウェブサイトにカスタムドメインを使用することもできます。たとえば、http：//www.wildrydes.comがS3でホストされています。このワークショップでは、カスタムドメインの設定については説明しませんが、詳細な手順についてはこちらをご覧ください。 [documentation](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html).
+あなたのウェブサイトにカスタムドメインを使用することもできます。たとえば、http：//www.wildrydes.com がS3でホストされています。このワークショップでは、カスタムドメインの設定については説明しませんが、詳細な手順についてはこちらをご覧ください。 [documentation](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html).
 
 #### 詳細な手順
 
