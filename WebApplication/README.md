@@ -1,38 +1,42 @@
 # Serverless Web Application Workshop
 
-In this workshop you'll deploy a simple web application that enables users to request unicorn rides from the [Wild Rydes](http://www.wildrydes.com/) fleet. The application will present users with an HTML based user interface for indicating the location where they would like to be picked up and will interface on the backend with a RESTful web service to submit the request and dispatch a nearby unicorn. The application will also provide facilities for users to register with the service and log in before requesting rides.
+このワークショップでは、ユーザーが[Wild Rydes](http://www.wildrydes.com/)のユニコーンライドをリクエストできるシンプルなWebアプリケーションをデプロイします。いわゆる配車(馬？)アプリケーションです。
 
-The application architecture uses [AWS Lambda](https://aws.amazon.com/lambda/), [Amazon API Gateway](https://aws.amazon.com/api-gateway/), [Amazon S3](https://aws.amazon.com/s3/), [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), and [Amazon Cognito](https://aws.amazon.com/cognito/). S3 hosts static web resources including HTML, CSS, JavaScript, and image files which are loaded in the user's browser. JavaScript executed in the browser sends and receives data from a public backend API built using Lambda and API Gateway. Amazon Cognito provides user management and authentication functions to secure the backend API. Finally, DynamoDB provides a  persistence layer where data can be stored by the API's Lambda function.
+このアプリケーションは、ユーザがピックアップ場所を指示するためのHTMLベースのユーザインタフェースをもち、RESTfulウェブサービスでリクエスト処理と近くのユニコーンの配送を行います。またアプリケーションは、乗車を要求する前に、ユーザーがサービスに登録してログインするための機能を提供します。
 
-See the diagram below for a depiction of the complete architecture.
+このアプリケーションのアーキテクチャは [AWS Lambda](https://aws.amazon.com/lambda/), [Amazon API Gateway](https://aws.amazon.com/api-gateway/), [Amazon S3](https://aws.amazon.com/s3/), [Amazon DynamoDB](https://aws.amazon.com/dynamodb/), and [Amazon Cognito](https://aws.amazon.com/cognito/) を使用します。
+
+S3は、HTML、CSS、JavaScript、およびユーザーのブラウザに読み込まれたイメージファイルを含む静的なWebリソースをホストします。ブラウザで実行されるJavaScriptは、LambdaとAPI Gatewayを使用して構築されたパブリックバックエンドAPIからデータを送受信します。 Amazon Cognitoは、バックエンドAPIを保護するためのユーザー管理機能と認証機能を提供します。最後に、DynamoDBは、APIのLambda関数によってデータを格納できる永続化レイヤーを提供します。
+
+完全なアーキテクチャの図については、下の図を参照してください。
 
 ![Wild Rydes Web Application Architecture](images/wildrydes-complete-architecture.png)
 
-If you'd like to jump in and get started please visit the [Static Web hosting](1_StaticWebHosting) module page to begin the workshop.
+さっそく開始するには、[Static Web hosting](1_StaticWebHosting)モジュールページを参照してワークショップを開始してください。
 
-## Prerequisites
+## 前提条件
 
-### AWS Account
+### AWS アカウント
 
-In order to complete this workshop you'll need an AWS Account with access to create AWS IAM, S3, DynamoDB, Lambda, API Gateway and Cognito resources. The code and instructions in this workshop assume only one student is using a given AWS account at a time. If you try sharing an account with another student, you'll run into naming conflicts for certain resources. You can work around these by appending a unique suffix to the resources that fail to create due to conflicts, but the instructions do not provide details on the changes required to make this work.
+このワークショップを完了するには、AWS IAM、S3、DynamoDB、Lambda、API Gateway、およびCognitoリソースを作成するためのアクセス権を持つAWSアカウントが必要です。このワークショップのコードと手順では、一度に1人のAWSアカウントしか使用していないと想定しています。別の生徒とアカウントを共有しようとすると、特定のリソースの名前の競合が発生します。競合によって作成に失敗したリソースに一意のサフィックスを追加することで、これらの問題を回避することができますが、指示にはこの作業を行うために必要な変更の詳細は記載されていません。
 
-All of the resources you will launch as part of this workshop are eligible for the AWS free tier if your account is less than 12 months old. See the [AWS Free Tier page](https://aws.amazon.com/free/) for more details.
+このワークショップで使用するすべてのリソースは、アカウントが12か月未満の場合はAWSフリー層の対象となります。詳細については、[AWS Free Tier]ページ（https://aws.amazon.com/free/）をご覧ください。
 
-### Browser
+### ブラウザ
 
-We recommend you use the latest version of Chrome to complete this workshop.
+このワークショップを完了するには、Chromeの最新バージョンを使用することをおすすめします。
 
-### Text Editor
+### テキストエディタ
 
-You will need a local text editor for making minor updates to configuration files.
+構成ファイルの更新を行うには、テキストエディタが必要です。
 
-## Modules
+## モジュール
 
-This workshop is broken up into multiple modules. You must complete each module before proceeding to the next, however, modules 1 and 2 have AWS CloudFormation templates available that you can use to launch the necessary resources without manually creating them yourself if you'd like to skip ahead.
+このワークショップは複数のモジュールに分かれています。次の手順に進む前に各モジュールを完了する必要がありますが、モジュール1と2にはAWS CloudFormationテンプレートが用意されていますので、必要なリソースを手作業で作成しなくても起動できます。
 
 1. [Static Web hosting](1_StaticWebHosting)
 2. [User Management](2_UserManagement)
 3. [Serverless Backend](3_ServerlessBackend)
 4. [RESTful APIs](4_RESTfulAPIs)
 
-After you have completed the workshop you can delete all of the resources that were created by following the [cleanup guide](9_CleanUp).
+ワークショップを完了したら、[クリーンアップガイド](9_CleanUp)に従って作成されたすべてのリソースを削除できます。
