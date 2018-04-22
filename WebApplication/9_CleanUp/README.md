@@ -4,7 +4,7 @@
 
 ## Resource Cleanup Instructions
 
-### 2. Module 4 Cleanup
+### 1. Module 4 Cleanup
 
 モジュール4で作成したREST APIを削除します。Amazon API Gateway ConsoleでAPIを選択すると、**Actions**ドロップダウンに**Delete API**オプションがあります。
 
@@ -22,7 +22,7 @@
 </p></details>
 
 
-### 3. Module 3 Cleanup
+### 2. Module 3 Cleanup
 
 モジュール3で作成したAWSLambda 関数、IAMロール、Amazon DynamoDBテーブルを削除します。
 
@@ -67,7 +67,7 @@
 
 </p></details>
 
-### 4. Module 2 Cleanup
+### 3. Module 2 Cleanup
 
 提供されたAWS CloudFormationテンプレートを使用してモジュール2を完成させた場合は、単にAWS CloudFormation Consoleを使用してスタックを削除してください。それ以外の場合は、モジュール2で作成したAmazon Cognitoユーザープールを削除します。
 
@@ -86,7 +86,7 @@
 
 </p></details>
 
-### 5. Module 1 Cleanup
+### 4. Module 1 Cleanup
 
 提供されたAWS CloudFormationテンプレートを使用してモジュール1を完成させた場合は、単にAWS CloudFormation Consoleを使用してスタックを削除してください。それ以外の場合は、モジュール1で作成したAmazon S3バケットを削除します。
 
@@ -104,7 +104,7 @@
 </p></details>
 
 
-### 6. CloudWatch Logs
+### 5. CloudWatch Logs
 
 AWS Lambdaは、Amazon CloudWatchログに関数ごとに新しいロググループを自動的に作成し、関数が呼び出されるとログを書き込みます。 **RequestUnicorn**機能のロググループを削除する必要があります。また、CloudFormationスタックを起動した場合、それらのスタックにカスタムリソースに関連付けられているロググループが存在する可能性があります。
 

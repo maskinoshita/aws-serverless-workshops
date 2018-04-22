@@ -20,7 +20,7 @@ AWS管理コンソールに精通している場合や、段階的な説明に�
 
 ### 1. Amazon DynamoDB テーブルを作成する
 
-Amazon DynamoDBコンソールを使用して、新しいDynamoDBテーブルを作成します。あなたのテーブル `Rides`とし、String型の` RideId`というパーティションキーを与えます。テーブル名とパーティションキーでは大文字と小文字が区別されます。正確なIDを使用してください。他のすべての設定にはデフォルトを使用してください。
+Amazon DynamoDBコンソールを使用して、新しいDynamoDBテーブルを作成します。あなたのテーブル `Rides-USERNAME`とし、String型の` RideId`というパーティションキーを与えます。テーブル名とパーティションキーでは大文字と小文字が区別されます。正確なIDを使用してください。他のすべての設定にはデフォルトを使用してください。
 
 テーブルを作成したら、次のステップで使用するARNをメモしてください。
 
@@ -31,7 +31,7 @@ Amazon DynamoDBコンソールを使用して、新しいDynamoDBテーブルを
 
 1. **テーブルの作成**をクリックします。
 
-1. **テーブル名** に`Rides`を入力します。小文字／大文字は区別されます。
+1. **テーブル名** に`Rides-USERNAME`を入力します。小文字／大文字は区別されます。
 
 1. **パーティションキー** に`RideId`を入力し、**文字列**をキータイプに設定します。小文字／大文字は区別されます。
 
@@ -52,7 +52,7 @@ Amazon DynamoDBコンソールを使用して、新しいDynamoDBテーブルを
 
 #### 詳細な手順
 
-新しいロールを作成するには、IAMコンソールを使用します。それに`WildRydesLambda`と名前をつけ、ロールタイプとしてAWS Lambdaを選択します。 Amazon CloudWatchログに書き込み、項目をDynamoDBテーブルに入れるために、権限を与えるポリシーをアタッチする必要があります。
+新しいロールを作成するには、IAMコンソールを使用します。それに`WildRydesLambda-USERNAME`と名前をつけ、ロールタイプとしてAWS Lambdaを選択します。 Amazon CloudWatchログに書き込み、項目をDynamoDBテーブルに入れるために、権限を与えるポリシーをアタッチする必要があります。
 
 `AWSLambdaBasicExecutionRole`という管理ポリシーをこのロールにアタッチして、必要なCloudWatchログ権限を付与します。また、前のセクションで作成したテーブルの `ddb：PutItem`アクションを可能にする独自のインライン・ポリシーを作成してください。
 
@@ -72,11 +72,11 @@ Amazon DynamoDBコンソールを使用して、新しいDynamoDBテーブルを
 
 1. **次のステップ: 確認** をクリックします。
 
-1. **ロール名に**に`WildRydesLambda`。
+1. **ロール名に**に`WildRydesLambda-USERNAME`。
 
 1. **ロールの作成**　をクリックします。
 
-1. ロールのページで`WildRydesLambda`を検索ボックスに入力し、作成したロールを選択します。
+1. ロールのページで`WildRydesLambda-USERNAME`を検索ボックスに入力し、作成したロールを選択します。
 
 1. アクセス権限のタブで, 右下にある**インラインポリシーの追加** を選択します。
     ![Inline policies screenshot](../images/inline-policies.png)
@@ -113,7 +113,7 @@ AWS Lambdaは、HTTPリクエストなどのイベントに応答してコード
 
 AWS Lambdaコンソールを使用して、APIリクエストを処理する「RequestUnicorn」という新しいラムダ関数を作成します。関数コードには、提供されている[requestUnicorn.js](requestUnicorn.js)の実装例を使用してください。そのファイルからコピーしてAWS Lambdaコンソールのエディタに貼り付けるだけです。
 
-前のセクションで作成した `WildRydesLambda` IAMロールを使用するように関数を設定してください。
+前のセクションで作成した `WildRydesLambda-USERNAME` IAMロールを使用するように関数を設定してください。
 
 <details>
 <summary><strong>ステップバイステップ手順 (詳細を展開)
@@ -125,13 +125,13 @@ AWS Lambdaコンソールを使用して、APIリクエストを処理する「R
 
 1. **一から作成** カードを選択します。
 
-1. **名前** フィールドに`RequestUnicorn`を入力します。
+1. **名前** フィールドに`RequestUnicorn-USERNAME`を入力します。
 
 1. **ランタイム**に**Node.js 6.10**を選択します。
 
 1. **ロール** ドロップダウンに`既存のロールを選択` が選択されていることを確認します。
 
-1. **既存のロール** ドロップダウンから`WildRydesLambda`を選択します。
+1. **既存のロール** ドロップダウンから`WildRydesLambda-USERNAME`を選択します。
     ![Create Lambda function screenshot](../images/create-lambda-function.png)
 
 1. **関数の作成**をクリックします。
