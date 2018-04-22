@@ -1,8 +1,8 @@
 # Module 2: User Authentication and Registration with Amazon Cognito User Pools
 
-In this module you'll create an Amazon Cognito user pool to manage your users' accounts. You'll deploy pages that enable customers to register as a new user, verify their email address, and sign into the site.
+このモジュールでは、ユーザーのアカウントを管理するAmazon Cognitoのユーザープールを作成します。顧客が新しいユーザーとして登録し、電子メールアドレスを確認し、サイトにサインインできるようにするページをデプロイします。
 
-If you want to skip ahead to the next module, you can launch one of these AWS CloudFormation templates in the Region of your choice in order to build the necessary resources automatically.
+このモジュールをスキップしたい場合は、必要なリソースを自動的に構築するために、CloudFormationテンプレートの1つを選択した地域で起動できます。
 
 Region| Launch
 ------|-----
