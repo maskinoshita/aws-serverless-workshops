@@ -6,135 +6,128 @@ If you want to skip ahead to the next module, you can launch one of these AWS Cl
 
 Region| Launch
 ------|-----
-US East (N. Virginia) | [![Launch Module 2 in us-east-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-us-east-1/WebApplication/2_UserManagement/user-management.yaml)
-US East (Ohio) | [![Launch Module 2 in us-east-2](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-2#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-us-east-2/WebApplication/2_UserManagement/user-management.yaml)
-US West (Oregon) | [![Launch Module 2 in us-west-2](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-us-west-2/WebApplication/2_UserManagement/user-management.yaml)
-EU (Frankfurt) | [![Launch Module 2 in eu-central-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-central-1#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-eu-central-1/WebApplication/2_UserManagement/user-management.yaml)
-EU (Ireland) | [![Launch Module 2 in eu-west-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-eu-west-1/WebApplication/2_UserManagement/user-management.yaml)
-EU (London) | [![Launch Module 2 in eu-west-2](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-2#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-eu-west-2/WebApplication/2_UserManagement/user-management.yaml)
 Asia Pacific (Tokyo) | [![Launch Module 2 in ap-northeast-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-northeast-1#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-ap-northeast-1/WebApplication/2_UserManagement/user-management.yaml)
-Asia Pacific (Seoul) | [![Launch Module 2 in ap-northeast-2](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-northeast-2#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-ap-northeast-2/WebApplication/2_UserManagement/user-management.yaml)
-Asia Pacific (Sydney) | [![Launch Module 2 in ap-southeast-2](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-southeast-2#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-ap-southeast-2/WebApplication/2_UserManagement/user-management.yaml)
-Asia Pacific (Mumbai) | [![Launch Module 2 in ap-south-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-south-1#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-ap-south-1/WebApplication/2_UserManagement/user-management.yaml)
+US East (N. Virginia) | [![Launch Module 2 in us-east-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-us-east-1/WebApplication/2_UserManagement/user-management.yaml)
 
 <details>
 <summary><strong>CloudFormation Launch Instructions (expand for details)</strong></summary><p>
 
-1. Choose the **Launch Stack** link above for the region of your choice.
+1. 好みのリージョンの **Launch Stack** をクリックします。
 
-1. Choose **Next** on the Select Template page.
+1. テンプレートの選択ページで **次へ** をクリックします。
 
-1. Provide the name of your website bucket from module 1 for the  **Website Bucket Name** (e.g. `wildrydes-yourname`) and choose **Next**.
+1. **Website Bucket Name** に モジュール１で入力した値(`wildrydes-{{あなたの名前}}` のような)を入力し、**次へ** をクリックします。
 
-    **Note:** You must specify the same bucket name you used in the previous module. If you provide a bucket name that does not exist or that you do not have write access to, the CloudFormation stack will fail during creation.
+    **Note:** 前のモジュールで使用したものと同じバケット名を指定する必要があります。存在しないか、書き込みアクセス権を持たないバケット名を指定すると、CloudFormationスタックは作成中に失敗します。
 
     ![Speficy Details Screenshot](../images/module2-cfn-specify-details.png)
 
-1. On the Options page, leave all the defaults and choose **Next**.
+1. オプションページではすべてデフォルトのままで **次へ** をクリックします。
 
-1. On the Review page, check the box to acknowledge that CloudFormation will create IAM resources and choose **Create**.
+1. 確認ページでは "AWS CloudFormation によって IAM リソースが作成される場合があることを承認"のボックスを **チェック** し、 **作成** をクリックします。
     ![Acknowledge IAM Screenshot](../images/cfn-ack-iam.png)
 
-    This template uses custom resources to create an Amazon Cognito user pool and client as well as generate a configuration file with the details needed to connect to this user pool and upload it to your website bucket. The template will create a role that provides access for creating these resources and uploading the config file to your bucket.
+    このテンプレートは、カスタムリソースを使用してAmazon Cognitoのユーザープールとクライアントを作成し、このユーザープールに接続してWebサイトのバケットにアップロードするのに必要な詳細を含む設定ファイルを生成します。テンプレートは、これらのリソースを作成し、設定ファイルをバケットにアップロードするためのアクセス権を提供するロールを作成します。
 
-1. Wait for the `wildrydes-webapp-2` stack to reach a status of `CREATE_COMPLETE`.
+1. `wildrydes-webapp-2` スタックが `CREATE_COMPLETE` ステータスに変わるまで待ちます。
 
-1. Follow the steps outlined in the [Implementation Verification](#implementation-verification) section to confirm you are ready to move on to the next module.
+1.   次のモジュールに進む準備が整ったことを確認するには、[実装検証](#実装検証) セクションに記載されている手順に従ってください。
 
 </p></details>
 
-## Architecture Overview
+## アーキテクチャ概要
 
-When users visit your website they will first register a new user account. For the purposes of this workshop we'll only require them to provide an email address and password to register. However, you can configure Amazon Cognito to require additional attributes in your own applications.
+ユーザーがあなたのウェブサイトにアクセスすると、まず新しいユーザーアカウントを登録します。このワークショップでは、登録するために電子メールアドレスとパスワードを要求するだけです。ただし、Amazon Cognitoでは、独自のアプリケーションで追加の属性を要求するように設定できます。
 
-After users submit their registration, Amazon Cognito will send a confirmation email with a verification code to the address they provided. To confirm their account, users will return to your site and enter their email address and the verification code they received. You can also confirm user accounts using the Amazon Cognito console if want to use fake email addresses for testing.
+ユーザーが登録を送信すると、Amazon Cognitoは、提供されたアドレスに確認コード付きの確認メールを送信します。アカウントを確認するために、ユーザーはサイトに戻り、自分のメールアドレスと受信した確認コードを入力します。テスト用に偽の電子メールアドレスを使用する場合は、Amazon Cognitoコンソールを使用してユーザーアカウントを確認することもできます。
 
-After users have a confirmed account (either using the email verification process or a manual confirmation through the console), they will be able to sign in. When users sign in, they enter their username (or email) and password. A JavaScript function then communicates with Amazon Cognito, authenticates using the Secure Remote Password protocol (SRP), and receives back a set of JSON Web Tokens (JWT). The JWTs contain claims about the identity of the user and will be used in the next module to authenticate against the RESTful API you build with Amazon API Gateway.
+ユーザーが確認済みのアカウントを持っている（電子メールの確認プロセスを使用するか、コンソールから手動で確認する）と、ユーザーはサインインできます。ユーザーがサインインする場合、ユーザー名（または電子メール）とパスワードが入力します。その後、JavaScript関数はAmazon Cognitoと通信し、Secure Remote Passwordプロトコル（SRP）を使用して認証し、一連のJSON Webトークン（JWT）を受信します。 JWTにはユーザーの身元に関する主張が含まれており、次のモジュールでAmazon API Gatewayで構築したRESTful APIに対して認証するために使用されます。
 
 ![Authentication architecture](../images/authentication-architecture.png)
 
-## Implementation Instructions
+## 実装手順
 
-Each of the following sections provide an implementation overview and detailed, step-by-step instructions. The overview should provide enough context for you to complete the implementation if you're already familiar with the AWS Management Console or you want to explore the services yourself without following a walkthrough.
+以下の各セクションでは、実装の概要と詳細なステップバイステップの手順を説明します。
 
-If you're using the latest version of the Chrome, Firefox, or Safari web browsers the step-by-step instructions won't be visible until you expand the section.
+AWS管理コンソールに精通している場合や、段階的な説明に従わずに自身でサービスを探索したい場合は、概要は実装を完了するのに十分な内容を提供しています。
 
-### 1. Create an Amazon Cognito User Pool
+最新バージョンのChrome、Firefox、SafariのWebブラウザを使用している場合は、セクションを展開するまで、ステップバイステップの手順は表示されません。
+
+### 1. Amazon Cognito User Pool を作成する
 
 #### Background
 
-Amazon Cognito provides two different mechanisms for authenticating users. You can use Cognito User Pools to add sign-up and sign-in functionality to your application or use Cognito Identity Pools to authenticate users through social identity providers such as Facebook, Twitter, or Amazon, with SAML identity solutions, or by using your own identity system. For this module you'll use a user pool as the backend for the provided registration and sign-in pages.
+Amazon Cognitoは、ユーザーを認証するための2つの異なるメカニズムを提供しています。**Cognito User Pools**によりアプリケーションにサインアップおよびサインイン機能を追加するか、**Cognito Identity Pool**により、Facebook、Twitter、Amazonなどのソーシャル認証プロバイダ、SAML認証ソリューション、または独自の認証システムを使用してユーザを認証できます。このモジュールでは、**Cognito User Pool**を登録、サインインページのバックエンドとして使用します。
 
-#### High-Level Instructions
+#### 詳細な手順
 
-Use the Amazon Cognito console to create a new user pool using the default settings. Once your pool is created, note the Pool Id. You'll use this value in a later section.
+Amazon Cognitoコンソールを使用して、デフォルト設定を使用して新しいユーザープールを作成します。プールが作成されたら、プールIDをメモします。後のセクションでこの値を使用します。
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary
+<p>
 
-1. From the AWS Console click **Services** then select **Cognito** under Security, Identity & Compliance.
+1. AWS マネージメントコンソールで **サービス** から セキュリティ、 アイデンティティ、 コンプライアンスの下にある **Cognito** を選択します。
 
-1. Choose **Manage your User Pools**.
+1. **ユーザープールの管理** を選択します。
 
-1. Choose **Create a User Pool**
+1. **ユーザープールを作成する** を選択します。
 
-1. Provide a name for your user pool such as `WildRydes`, then select **Review Defaults**
+1. `WildRydes`のようなあなたのユーザープールの名前を入力し、**デフォルトを確認する**を選択してください。
 
     ![Create a user pool screenshot](../images/create-a-user-pool.png)
 
-1. On the review page, click **Create pool**.
+1. 確認ページで **プールの作成** をクリックします。
 
-1. Note the **Pool Id** on the Pool details page of your newly created user pool.
+1. 新しく作成されたユーザープールのプールの詳細ページで、**プール ID** (`us-east-1_ygbFpYlRC`のような) をメモしておきます。
 
 </p></details>
 
-### 2. Add an App Client to Your User Pool
+### 2. アプリケーションクライアントをユーザープールに追加する
 
-From the Amazon Cognito console select your user pool and then select the **App clients** section. Add a new app and make sure the Generate client secret option is deselected. Client secrets aren't supported with the JavaScript SDK. If you do create an app with a generated secret, delete it and create a new one with the correct configuration.
+Amazon Cognitoコンソールで、ユーザープールを選択してから、**アプリクライアント**セクションを選択します。新しいアプリを追加して、[クライアントシークレットの生成]オプションがオフになっていることを確認します。クライアントシークレットは、JavaScript SDKではサポートされていません。もしアプリケーションをクライアントシークレット付きで作成してしまった場合は、削除して正しい設定で新しいものを作成してください。
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
-1. From the Pool Details page for your user pool, select **App clients** from the **General settings** section in the left navigation bar.
+1. ユーザープールのプールの詳細ページの左のナビゲーションから **アプリクライアント** を選択します。
 
-1. Choose **Add an app client**.
+1. **アプリクライアントの追加** を選択します。
 
-1. Give the app client a name such as `WildRydesWebApp`.
+1. `WildRydesWebApp` のようなアプリクライアント名を設定します。
 
-1. **Uncheck** the Generate client secret option. Client secrets aren't supported for use with browser-based applications.
+1. クライアントシークレットの生成オプションのチェックを**外します**。クライアントシークレットは、ブラウザベースのアプリケーションではサポートされていません。
 
-1. Choose **Create app client**.
+1. **アプリクライアントの作成** を選択します。
 
    <kbd>![Create app client screenshot](../images/add-app.png)</kbd>
 
-1. Note the **App client id** for the newly created application.
+1. 新しく作成されたアプリクライアントの**App client id**(`40f3an21v98dj996sflhia83jv`のような)をメモしておきます。
 
 </p></details>
 
-### 3. Update the config.js File in Your Website Bucket
+### 3. Webサイトのバケット内の`config.js`を更新する
 
-The [/js/config.js](../1_StaticWebHosting/website/js/config.js) file contains settings for the user pool ID, app client ID and Region. Update this file with the settings from the user pool and app you created in the previous steps and upload the file back to your bucket.
+ [/js/config.js](../1_StaticWebHosting/website/js/config.js) ファイルには、ユーザープールID、アプリケーションクライアントID、地域の設定が含まれています。前の手順で作成したユーザープールとアプリケーションの設定でこのファイルを更新し、ファイルをバケットにアップロードし直してください。
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
-1. Download the [config.js](../1_StaticWebHosting/website/js/config.js) file from the website directory of the first module in this repository to your local machine.
+1. Webサイトディレクトリから [config.js](../1_StaticWebHosting/website/js/config.js) を開きます。
 
-1. Open the downloaded file using the text editor of your choice.
+1. `cognito`セクションを、作成したユーザープールとアプリケーションの正しい値で更新してください。
 
-1. Update the `cognito` section with the correct values for the user pool and app you just created.
+    作成したユーザープールを選択後、Amazon Cognitoコンソールのプール詳細ページから`userPoolId`を探すことができます。
 
-    You can find the value for `userPoolId` on the Pool details page of the Amazon Cognito console after you select the user pool that you created.
+     ![Pool ID](../images/pool-id.png)
 
-    ![Pool ID](../images/pool-id.png)
-
-    You can find the value for `userPoolClientId` by selecting **App clients** from the left navigation bar. Use the value from the **App client id** field for the app you created in the previous section.
+    左のナビゲーションバー中の**アプリクライアント** を選択すると、`userPoolClientId`を探すことができます。
 
     ![Pool ID](../images/client-id.png)
 
-    The value for `region` should be the AWS Region code where you created your user pool. E.g. `us-east-1` for the N. Virginia Region, or `us-west-2` for the Oregon Region. If you're not sure which code to use, you can look at the Pool ARN value on the Pool details page. The Region code is the part of the ARN immediately after `arn:aws:cognito-idp:`.
+    `region`の値は、あなたのユーザープールを作成したAWS Regionコードでなければなりません。例えば。バージニア州の場合は「us-east-1」、オレゴン州の場合は「us-west-2」です。使用するコードが不明な場合は、プールの詳細ページでプールのARN値を確認できます。リージョンコードはARNの `arn：aws：cognito-idp：`のすぐ後の部分です。
 
-    The updated config.js file should look like this. Note that the actual values for your file will be different:
+    更新されたconfig.jsファイルは次のようになります。ファイルの実際の値は異なることに注意してください。
     ```JavaScript
     window._config = {
         cognito: {
@@ -148,9 +141,9 @@ The [/js/config.js](../1_StaticWebHosting/website/js/config.js) file contains se
     };
     ```
 
-1. Save the modified file making sure the filename is still `config.js`.
+1. 変更した`config.js`を保存します。
 
-1. Open the Amazon S3 console by visiting [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/).
+1. Amazon S3 コンソールを開きます。 [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/).
 
 1. Select your Wild Rydes website bucket that you created in the previous module.
 
@@ -168,37 +161,37 @@ The [/js/config.js](../1_StaticWebHosting/website/js/config.js) file contains se
 
 <p>
 
-**Note:** Instead of having you write the browser-side code for managing the registration, verification, and sign in flows, we provide a working implementation in the assets you deployed in the first module. The [cognito-auth.js](../1_StaticWebHosting/website/js/cognito-auth.js) file contains the code that handles UI events and invokes the appropriate Amazon Cognito Identity SDK methods. For more information about the SDK, see the [project page on GitHub](https://github.com/aws/amazon-cognito-identity-js).
+**Note:** 登録の管理、検証、サインインのフローをブラウザ側のコードで記述するのではなく、モジュール中のアセットに動作する実装を提供しています。 [cognito-auth.js](../1_StaticWebHosting/website/js/cognito-auth.js)ファイルには、UIイベントを処理し、適切なAmazon Cognito Identity SDKメソッドを呼び出すコードが含まれています。 SDKの詳細については、[GitHubのプロジェクトページ]（https://github.com/aws/amazon-cognito-identity-js）を参照してください。
 
 </p>
 
-## Implementation Validation
+## 実装検証
 
-1. Visit `/register.html` under your website domain, or choose the **Giddy Up!** button on the homepage of your site.
+1. ウェブサイトのドメインの下で `/register.html`にアクセスするか、サイトの** Giddy Up！**ボタンを選択してください。
 
-1. Complete the registration form and choose **Let's Ryde**. You can use your own email or enter a fake email. Make sure to choose a password that contains at least one upper-case letter, a number, and a special character. Don't forget the password you entered for later. You should see an alert that confirms that your user has been created.
+1. 登録フォームに記入し、**Let's Ryde**を選択します。あなた自身の電子メールを使用するか、偽の電子メールを入力することができます。少なくとも1つの大文字、数字、および特殊文字を含むパスワードを選択してください。後で入力したパスワードを忘れないでください。ユーザーが作成されたことを確認するアラートが表示されます。
 
-1. Confirm your new user using one of the two following methods.
+1. 次の2つの方法のいずれかを使用して、新しいユーザーを確認します。
 
-  1. If you used an email address you control, you can complete the account verification process by visiting `/verify.html` under your website domain and entering the verification code that is emailed to you. Please note, the verification email may end up in your spam folder. For real deployments we recommend [configuring your user pool to use Amazon Simple Email Service](http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pool-settings-message-customizations.html#cognito-user-pool-settings-ses-authorization-to-send-email) to send emails from a domain you own.
+  1. 管理しているメールアドレスを使用している場合は、ウェブサイトドメインの下にある`/verify.html`にアクセスし、メールで送信された確認コードを入力してアカウント確認プロセスを完了できます。確認メールはスパムフォルダに保存される可能性があります。 実際のアプリケーションでは [SMS と E メール確認メッセージとユーザー招待メッセージのカスタマイズ](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/cognito-user-pool-settings-message-customizations.html)を使用して、所有するドメインからメールを送信します。
 
-  1. If you used a dummy email address, you must confirm the user manually through the Cognito console.
+  1. ダミーのメールアドレスを使用した場合は、Cognitoコンソールから手動で確認する必要があります。
 
-    1. From the AWS console, click Services then select **Cognito** under Security, Identity & Compliance.
-    1. Choose **Manage your User Pools**
-    1. Select the `WildRydes` user pool and click **Users and groups** in the left navigation bar.
-    1. You should see a user corresponding to the email address that you submitted through the registration page. Choose that username to view the user detail page.
-    1. Choose **Confirm user** to finalize the account creation process.
+    1. AWS マネージメントコンソールで **サービス** から セキュリティ、 アイデンティティ、 コンプライアンスの下にある **Cognito** を選択します
+    1. **ユーザープールの管理** を選択します。
+    1. `WildRydes` ユーザープールを選択し、左のナビゲーションバーから**ユーザーとグループ** を選択します。
+    1. 登録ページから送信したメールアドレスに対応するユーザーが表示されます。ユーザー詳細ページを表示するユーザー名を選択します。
+    1. **Confirm user** を押し、ユーザ作成プロセスを完了します。
 
-1. After confirming the new user using either the `/verify.html` page or the Cognito console, visit `/signin.html` and log in using the email address and password you entered during the registration step.
+1. `/verify.html`ページまたはCognitoコンソールを使用して新しいユーザーを確認した後、`/signin.html`にアクセスして、登録ステップで入力した電子メールアドレスとパスワードを使用してログインします。
 
-1. If successful you should be redirected to `/ride.html`. You should see a notification that the API is not configured.
+1. 成功した場合は`/ ride.html`にリダイレクトされます。APIが設定されていないという通知が表示されます。
 
     ![Successful login screenshot](../images/successful-login.png)
 
-After you have successfully logged into your web application, you can proceed to the next module, [Serverless Backend](../3_ServerlessBackend).
+Webアプリケーションに正常にログインしたら、次のモジュールに進むことができます。 [Serverless Backend](../3_ServerlessBackend).
 
 ### Extra
 
-* Try copying the **auth_token** you've received and paste that into an [online JWT Decoder](https://jwt.io/) to understand what this token means for your application
+* あなたが受け取った**auth_token**をコピーして、[online JWT Decoder](https://jwt.io/)に貼り付けてみてください。このトークンがアプリケーションにとってどんな意味を持つのかの手助けになります。
 
