@@ -1,149 +1,126 @@
 # Workshop Cleanup
 
-This page provides instructions for cleaning up the resources created during the preceding modules.
+このページでは、前のモジュールで作成されたリソースをクリーンアップする方法について説明します。
 
 ## Resource Cleanup Instructions
 
-### 1. Module 5 Cleanup
-Delete the Unicorn Manager CloudFront distribution and S3 bucket for the static website hosting created in module 5. Using the Lambda console, also delete the **ListUnicornRides** and **ListUnicornAuthorizer** functions. If you have deployed the pre-requisites CloudFormation stack, delete the stack using the CloudFormation console.
-
-<details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
-
-1. In the AWS Management Console, click **Services** then select **CloudFront** under Networking & Content Delivery.
-
-1. Select the distribution for the Unicorn Manager application we created in module 5 and click **Disable**.
-
-1. Once the distribution is disabled, click **Delete**.
-
-1. Using the **Services** dropdown, navigate to the **S3** console under Storage.
-
-1. Select the **unicornmanager-xxx** bucket and click **Delete bucket**. In the confirmation window enter the bucket name and click **Confirm**.
-
-1. Next, using the **Services** dropdown navigate to the **Lambda** console under Compute.
-
-1. From the functions list, select the **ListUnicornRides** function and use the **Actions** dropdown to select **Delete**.
-
-1. Repeat the same operation for the **ListUnicornAuthorizer** function.
-
-1. If you have deployed the pre-requisites stack before starting module 5, navigate to the **CloudFormation** console under Management Tools.
-
-1. Select the **WildRydes-xxx** stack and use the **Actions** dropdown to click **Delete Stack**.
-
-</p></details>
-
 ### 2. Module 4 Cleanup
-Delete the REST API created in module 4. There is a **Delete API** option in the **Actions** drop-down when you select your API in the Amazon API Gateway Console.
+
+モジュール4で作成したREST APIを削除します。Amazon API Gateway ConsoleでAPIを選択すると、**Actions**ドロップダウンに**Delete API**オプションがあります。
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
-1. In the AWS Management Console, click **Services** then select **API Gateway** under Application Services.
+1. AWS マネージメントコンソールで **サービス** から ネットワーキング ＆ コンテンツ配信の下にある **API Gateway** を選択します。
 
-1. Select the API you created in module 4.
+1. モジュール4で作成したAPIを選択します。
 
-1. Expand the **Actions** drop-down and choose **Delete API**.
+1. **アクション** ドロップダウンを展開し、**APIの削除** を選択します。
 
-1. Enter the name of your API when prompted and choose **Delete API**.
+1. API名の入力を促されるので、API名を入力してから**APIの削除** を選択します。
 
 </p></details>
 
 
 ### 3. Module 3 Cleanup
-Delete the AWS Lambda function, IAM role and Amazon DynamoDB table you created in module 3.
+
+モジュール3で作成したAWSLambda 関数、IAMロール、Amazon DynamoDBテーブルを削除します。
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
-#### Lambda Function
+#### Lambda 関数
 
-1. In the AWS Management Console, click **Services** then select **Lambda** under Compute.
+1. AWS マネージメントコンソールで **サービス** から コンピューティングの下にある **Lambda** を選択します。
 
-1. Select the `RequestUnicorn` function you created in module 3.
+1. モジュール3で作成した `RequestUnicorn` 関数を選択します。
 
-1. From the **Actions** drop-down, choose **Delete function**.
+1. **アクション** ドロップダウンから, **関数の削除** を選択します。
 
-1. Choose **Delete** when prompted to confirm.
+1. 確認を促されるので**削除**を選択します。
 
 #### IAM Role
 
-1. In the AWS Management Console, click **Services** then select **IAM** under Security, Identity & Compliance.
+1. AWS マネージメントコンソールで **サービス** から セキュリティ、 アイデンティティ、 コンプライアンスの下にある **IAM** を選択します。
 
-1. Select **Roles** from the navigation menu.
+1. ナビゲーションメニューから**ロール**を選択します。
 
-1. Type `WildRydesLambda` into the filter box.
+1. 検索ボックスに `WildRydesLambda` を入力します。
 
-1. Select the role you created in module 3.
+1. モジュール3で作成したロールを選択します。
 
-1. From the **Role actions** drop-down, select **Delete role**.
+1. **ロールの削除**を選択します。
 
-1. Choose **Yes, Delete** when prompted to confirm.
+1. 確認を促されるので **はい、削除します** を選択します。
 
 #### DynamoDB Table
 
-1. In the AWS Management Console, click **Services** then select **DynamoDB** under Databases
+1. AWS マネージメントコンソールで **サービス** から データベースの下にある **DynamoDB** を選択します。
 
-1. Choose **Tables** in the navigation menu.
+1. ナビゲーションメニューから **テーブル** を選択します。
 
-1. Choose the **Rides** table you created in module 3.
+1. モジュール3で作成した **Rides** テーブルを選択します。
 
-1. Choose **Delete table** from the **Actions** drop-down.
+1. **テーブルの削除** を選択します。
 
-1. Leave the checkbox to **Delete all CloudWatch alarms for this table** selected and choose **Delete**.
+1. **このテーブルに対応するすべての CloudWatch アラームを削除します** を **チェックしたまま** で **削除** を押します。
 
 </p></details>
 
 ### 4. Module 2 Cleanup
-If you used the provided AWS CloudFormation template to complete module 2, simply delete the stack using the AWS CloudFormation Console. Otherwise, delete the Amazon Cognito user pool you created in module 2.
+
+提供されたAWS CloudFormationテンプレートを使用してモジュール2を完成させた場合は、単にAWS CloudFormation Consoleを使用してスタックを削除してください。それ以外の場合は、モジュール2で作成したAmazon Cognitoユーザープールを削除します。
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
-1. From the AWS Console click **Services** then select **Cognito** under Mobile Services.
+1. AWS マネージメントコンソールで **サービス** から セキュリティ、 アイデンティティ、 コンプライアンスの下にある **Cognito** を選択します。
 
-1. Choose **Manage your User Pools**.
+1. **ユーザープールの管理**を選択します。
 
-1. Select the **WildRydes** user pool you created in module 2.
+1. モジュール２で作成したユーザープール **WildRydes** を選択します。
 
-1. Choose **Delete Pool** in the upper right corner of the page.
+1. ページの右上の**プールの削除** を選択します。
 
-1. Type `delete` and choose **Delete Pool** when prompted to confirm.
+1. 確認を促されるので `delete`と入力し、**プールの削除** を選択します。
 
 </p></details>
 
 ### 5. Module 1 Cleanup
-If you used the provided AWS CloudFormation template to complete module 1, simply delete the stack using the AWS CloudFormation Console. Otherwise, delete the Amazon S3 bucket you created in module 1.
+
+提供されたAWS CloudFormationテンプレートを使用してモジュール1を完成させた場合は、単にAWS CloudFormation Consoleを使用してスタックを削除してください。それ以外の場合は、モジュール1で作成したAmazon S3バケットを削除します。
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
-1. In the AWS Management Console choose **Services** then select **S3** under Storage.
+1. AWS マネージメントコンソールで **サービス** から ストレージの下にある **S3** を選択します。
 
-1. Select the bucket you created in module 1.
+1. モジュール１で作成したバケットを選択します。
 
-1. Choose **Delete bucket**.
+1. **バケットを削除する** を選択します。
 
-1. Enter the name of your bucket when prompted to confirm, Then choose confirm.
+1. 確認を促されるので、バケット名を入力し、**確認**を押す。
 
 </p></details>
 
 
 ### 6. CloudWatch Logs
-AWS Lambda automatically creates a new log group per function in Amazon CloudWatch Logs and writes logs to it when your function is invoked. You should delete the log group for the **RequestUnicorn** function. Also, if you launched any CloudFormation stacks, there may be log groups associated with custom resources in those stacks that you should delete.
+
+AWS Lambdaは、Amazon CloudWatchログに関数ごとに新しいロググループを自動的に作成し、関数が呼び出されるとログを書き込みます。 **RequestUnicorn**機能のロググループを削除する必要があります。また、CloudFormationスタックを起動した場合、それらのスタックにカスタムリソースに関連付けられているロググループが存在する可能性があります。
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
-1. From the AWS Console click **Services** then select **CloudWatch** under Management Tools.
+1. AWS マネージメントコンソールで **サービス** から 管理ツールの下にある **CloudWatch** を選択します。
 
-1. Choose **Logs** in the navigation menu.
+1. ナビゲーションメニューから**ログ**を選択します。
 
-1. Select the **/aws/lambda/RequestUnicorn** log group. If you have many log groups in your account, you can type `/aws/lambda/RequestUnicorn` into the **Filter** text box to easily locate the log group.
+1. **/aws/lambda/RequestUnicorn**ロググループを選択します。あなたのアカウントにロググループがたくさんある場合、 `/aws/lambda/RequestUnicorn`を**フィルタ**テキストボックスに入力すれば、簡単にロググループを見つけることができます。
 
-1. Choose **Delete log group** from the **Actions** drop-down.
+1. **アクション** ドロップダウンから**ロググループの削除** を選択します。
 
-1. Choose **Yes, Delete** when prompted to confirm.
+1. 確認を促されるので **はい、削除します**を選択します。
 
-1. If you launched any CloudFormation templates to complete a module, repeat steps 3-5 for any log groups which begin with `/aws/lambda/wildrydes-webapp`.
+1. モジュールを完成させるためにCloudFormationテンプレートを起動した場合は、 `/ aws / lambda / wildrydes-webapp`で始まるロググループに対して、ステップ3〜5を繰り返します。
 
 </p></details>
