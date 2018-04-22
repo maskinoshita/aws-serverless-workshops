@@ -224,17 +224,9 @@ Webサイトデプロイメントの/js/config.jsファイルを更新して、�
 
 1. ファイルを保存します。
 
-1. In the AWS Management Console, choose **Services** then select **S3** under Storage.
+1. 変更したファイルをS3にコピーします。変更したファイルだけ転送されます。
 
-1. Choose your website bucket and then browse to the `js` key prefix.
-
-1. Choose **Upload**.
-
-1. Choose **Add files**, select the local copy of `config.js` and then click **Next**.
-
-1. Choose **Next** without changing any defaults through the `Set permissions` and `Set properties` sections.
-
-1. Choose **Upload** on the `Review` section.
+    aws s3 sync aws-serverless-workshops/WebApplication/1_StaticWebHosting/website s3://YOUR_BUCKET_NAME --region YOUR_BUCKET_REGION
 
 </p></details>
 

@@ -143,19 +143,9 @@ Amazon Cognitoコンソールで、ユーザープールを選択してから、
 
 1. 変更した`config.js`を保存します。
 
-1. Amazon S3 コンソールを開きます。 [https://console.aws.amazon.com/s3/](https://console.aws.amazon.com/s3/).
+1. 変更したファイルをS3にコピーします。変更したファイルだけ転送されます。
 
-1. Select your Wild Rydes website bucket that you created in the previous module.
-
-1. Browse to the `js` prefix.
-
-1. Choose **Upload**, then **Add Files**.
-
-1. Browse to the directory where you saved your locally modified version of the config.js file, select it, and choose **Open**.
-
-    ![s3-upload.png](../images/s3-upload.png)
-
-1. Choose **Upload** on the left side of the dialog.
+    aws s3 sync aws-serverless-workshops/WebApplication/1_StaticWebHosting/website s3://YOUR_BUCKET_NAME --region YOUR_BUCKET_REGION
 
 </p></details>
 
@@ -181,11 +171,11 @@ Amazon Cognitoコンソールで、ユーザープールを選択してから、
     1. **ユーザープールの管理** を選択します。
     1. `WildRydes` ユーザープールを選択し、左のナビゲーションバーから**ユーザーとグループ** を選択します。
     1. 登録ページから送信したメールアドレスに対応するユーザーが表示されます。ユーザー詳細ページを表示するユーザー名を選択します。
-    1. **Confirm user** を押し、ユーザ作成プロセスを完了します。
+    1. **ユーザの確認** を押し、ユーザ作成プロセスを完了します。
 
 1. `/verify.html`ページまたはCognitoコンソールを使用して新しいユーザーを確認した後、`/signin.html`にアクセスして、登録ステップで入力した電子メールアドレスとパスワードを使用してログインします。
 
-1. 成功した場合は`/ ride.html`にリダイレクトされます。APIが設定されていないという通知が表示されます。
+1. 成功した場合は`/ride.html`にリダイレクトされます。APIが設定されていないという通知が表示されます。
 
     ![Successful login screenshot](../images/successful-login.png)
 

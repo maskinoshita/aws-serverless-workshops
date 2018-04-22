@@ -93,6 +93,15 @@ Amazon S3 は Web サーバーを構成または管理することなく、静�
 
 </p></details>
 
+<details>
+<summary><strong>CLI ステップバイステップ手順(詳細を展開)
+
+すでにCLIをインストール設定している場合は、それを使用してバケットを作成できます。`YOUR_BUCKET_NAME`を自分で決めた名前に、バケットを作成したいリージョンコード（例えばap-northeast-1）で` YOUR_BUKET_REGION`を置き換えて次のコマンドを実行します。
+
+    aws s3api create-bucket --bucket YOUR_BUKCET_NAME --region YOUR_BUCKET_REGION --create-bucket-configuration LocationConstraint=YOUR_BUCKET_REGION
+
+</p></details>
+
 ### 2. コンテンツのアップロード
 
 このモジュールの静的アセットを S3 バケットにアップロードします。この手順には、AWS マネージメントコンソール (Google Chrome ブラウザが必要) 、AWS CLI、または提供されている Cloud Formation テンプレートを使用できます。すでにローカルマシンにAWS CLIをインストールして設定している場合は、その方法を使用することをお勧めします。それ以外の場合は、最新バージョンのGoogle Chromeを利用してコンソールを使用します。
@@ -103,6 +112,12 @@ Amazon S3 は Web サーバーを構成または管理することなく、静�
 すでにCLIをインストール設定している場合は、それを使用して`s3://wildrydes-us-east-1/WebApplication/1_StaticWebHosting/website`から必要な Web アセットをバケットにコピーできます。
 
 前のセクションで使用したバケット名で `YOUR_BUCKET_NAME`を置き換え、バケットを作成したリージョンコード（例えばap-northeast-1）で` YOUR_BUKET_REGION`を置き換えて次のコマンドを実行します。
+
+ローカルのファイルを転送する場合:
+
+    aws s3 sync aws-serverless-workshops/WebApplication/1_StaticWebHosting/website s3://YOUR_BUCKET_NAME --region YOUR_BUCKET_REGION
+
+S3上に用意されたテンプレートを転送する場合
 
     aws s3 sync s3://wildrydes-us-east-1/WebApplication/1_StaticWebHosting/website s3://YOUR_BUCKET_NAME --region YOUR_BUCKET_REGION
 

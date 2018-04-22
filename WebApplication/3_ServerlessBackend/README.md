@@ -139,7 +139,7 @@ AWS Lambdaコンソールを使用して、APIリクエストを処理する「R
 1. **関数コード** セクションまでスクロールし、既存の**index.js** の内容を [requestUnicorn.js](requestUnicorn.js)で上書きします。
     ![Create Lambda function screenshot](../images/create-lambda-function-code.png)
 
-1. ページの右上端にある**"保存"**をクリックします。
+1. ページの右上端にある**保存**をクリックします。
 
 </p></details>
 
@@ -197,4 +197,4 @@ AWS Lambdaコンソールを使用して、APIリクエストを処理する「R
 }
 ```
 
-Lambdaコンソールを使って新しい関数を正常にテストしたら、次のモジュール[RESTful APIs](../ 4_RESTfulAPIs)に進むことができます。
+Lambdaコンソールを使って新しい関数を正常にテストしたら、次のモジュール[RESTful APIs](../4_RESTfulAPIs)に進むことができます。
