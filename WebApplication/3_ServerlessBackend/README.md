@@ -1,156 +1,160 @@
 # Module 3: Serverless Service Backend
 
-In this module you'll use AWS Lambda and Amazon DynamoDB to build a backend process for handling requests from your web application. The browser application that you deployed in the first module allows users to request that a unicorn be sent to a location of their choice. In order to fulfill those requests, the JavaScript running in the browser will need to invoke a service running in the cloud.
+このモジュールでは、AWS LambdaとAmazon DynamoDBを使用して、Webアプリケーションからのリクエストを処理するためのバックエンド処理を構築します。最初のモジュールにデプロイしたブラウザアプリケーションを使用すると、ユーザーはユニコーンを選択した場所に配送するようにリクエストできます。このリクエストの要求に応えるためには、ブラウザで実行されているJavaScriptがクラウド内で実行されているサービスを呼び出す必要があります。
 
-You'll implement a Lambda function that will be invoked each time a user requests a unicorn. The function will select a unicorn from the fleet, record the request in a DynamoDB table and then respond to the front-end application with details about the unicorn being dispatched.
+ユーザーがユニコーンを要求するたびに呼び出されるLambda関数を実装します。この機能は、プールからユニコーンを選択し、その要求をDynamoDBテーブルに記録し、フロントエンドアプリケーションに派遣されるユニコーンに関する詳細を応答します。
 
 ![Serverless backend architecture](../images/serverless-backend-architecture.png)
 
-The function is invoked from the browser using Amazon API Gateway. You'll implement that connection in the next module. For this module you'll just test your function in isolation.
+この関数は、Amazon API Gatewayを使用してブラウザから呼び出されます。その機能は次のモジュールで実装します。このモジュールでは、関数を単独でテストするだけです。
 
-If you want to skip ahead to the next module, you can **launch the stack from [module 4 (RESTful APIs)](../4_RESTfulAPIs)**.
+次のモジュールに進む必要がある場合は、 [module 4 (RESTful APIs)](../4_RESTfulAPIs)の**launch the stack**を選択することでこのモジュールをスキップできます。
 
-## Implementation Instructions
+## 実装手順
 
-Each of the following sections provide an implementation overview and detailed, step-by-step instructions. The overview should provide enough context for you to complete the implementation if you're already familiar with the AWS Management Console or you want to explore the services yourself without following a walkthrough.
+以下の各セクションでは、実装の概要と詳細なステップバイステップの手順を説明します
 
-If you're using the latest version of the Chrome, Firefox, or Safari web browsers the step-by-step instructions won't be visible until you expand the section.
+AWS管理コンソールに精通している場合や、段階的な説明に従わずに自身でサービスを探索したい場合は、概要は実装を完了するのに十分な内容を提供しています。
 
-### 1. Create an Amazon DynamoDB Table
+最新バージョンのChrome、Firefox、SafariのWebブラウザを使用している場合は、セクションを展開するまで、ステップバイステップの手順は表示されません。
 
-Use the Amazon DynamoDB console to create a new DynamoDB table. Call your table `Rides` and give it a partition key called `RideId` with type String. The table name and partition key are case sensitive. Make sure you use the exact IDs provided. Use the defaults for all other settings.
+### 1. Amazon DynamoDB テーブルを作成する
 
-After you've created the table, note the ARN for use in the next step.
+Amazon DynamoDBコンソールを使用して、新しいDynamoDBテーブルを作成します。あなたのテーブル `Rides`とし、String型の` RideId`というパーティションキーを与えます。テーブル名とパーティションキーでは大文字と小文字が区別されます。正確なIDを使用してください。他のすべての設定にはデフォルトを使用してください。
+
+テーブルを作成したら、次のステップで使用するARNをメモしてください。
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
-1. From the AWS Management Console, choose **Services** then select **DynamoDB** under Databases.
+1. AWS マネージメントコンソールで **サービス** から データベースの下にある **DynamoDB** を選択します。
 
-1. Choose **Create table**.
+1. **テーブルの作成**をクリックします。
 
-1. Enter `Rides` for the **Table name**. This field is case sensitive.
+1. **テーブル名** に`Rides`を入力します。小文字／大文字は区別されます。
 
-1. Enter `RideId` for the **Partition key** and select **String** for the key type. This field is case sensitive.
+1. **パーティションキー** に`RideId`を入力し、**文字列**をキータイプに設定します。小文字／大文字は区別されます。
 
-1. Check the **Use default settings** box and choose **Create**.
+1. **デフォルト設定の使用** を`チェック`し、**作成**　を押します。
 
     ![Create table screenshot](../images/ddb-create-table.png)
 
-1. Scroll to the bottom of the Overview section of your new table and note the **ARN**. You will use this in the next section.
+1. 新しいテーブルの概要セクションの一番下までスクロールし、**ARN**を確認します。次のセクションでこれを使用します。
 
 </p></details>
 
 
-### 2. Create an IAM Role for Your Lambda function
+### 2. Lambda 関数のIAMロールを作成する
 
 #### Background
 
-Every Lambda function has an IAM role associated with it. This role defines what other AWS services the function is allowed to interact with. For the purposes of this workshop, you'll need to create an IAM role that grants your Lambda function permission to write logs to Amazon CloudWatch Logs and access to write items to your DynamoDB table.
+すべてのLambda関数にはIAMロールが関連付けられています。このロールは、この関数が他のAWSサービスと対話することを許可するサービスを定義します。このワークショップでは、Lambda関数に、Amazon CloudWatchログにログを書き込み、DynamoDBテーブルにアイテムを書き込むためのアクセス権を与えるIAMロールを作成する必要があります。
 
-#### High-Level Instructions
+#### 詳細な手順
 
-Use the IAM console to create a new role. Name it `WildRydesLambda` and select AWS Lambda for the role type. You'll need to attach policies that grant your function permissions to write to Amazon CloudWatch Logs and put items to your DynamoDB table.
+新しいロールを作成するには、IAMコンソールを使用します。それに`WildRydesLambda`と名前をつけ、ロールタイプとしてAWS Lambdaを選択します。 Amazon CloudWatchログに書き込み、項目をDynamoDBテーブルに入れるために、権限を与えるポリシーをアタッチする必要があります。
 
-Attach the managed policy called `AWSLambdaBasicExecutionRole` to this role to grant the necessary CloudWatch Logs permissions. Also, create a custom inline policy for your role that allows the `ddb:PutItem` action for the table you created in the previous section.
+`AWSLambdaBasicExecutionRole`という管理ポリシーをこのロールにアタッチして、必要なCloudWatchログ権限を付与します。また、前のセクションで作成したテーブルの `ddb：PutItem`アクションを可能にする独自のインライン・ポリシーを作成してください。
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>ステップバイステップ手順 (詳細を展開)
+</strong></summary><p>
 
-1. From the AWS Management Console, click on **Services** and then select **IAM** in the Security, Identity & Compliance section.
+1. AWS マネージメントコンソールで **サービス** から セキュリティ、 アイデンティティ、 コンプライアンスの下にある **IAM** を選択します。
 
-1. Select **Roles** in the left navigation bar and then choose **Create new role**.
+1. 左のナビゲーションバーから **ロール**を選択し、**ロールの作成**を選択します。
 
-1. Select **Lambda** for the role type from the **AWS service** group, then click **Next: Permissions**
+1.  **AWS サービス** グループを選択し、`このロールを使用するサービスを選択`で**Lambda**を選び、**次のステップ: アクセス権限**をクリックします。
 
-    **Note:** Selecting a role type automatically creates a trust policy for your role that allows AWS services to assume this role on your behalf. If you were creating this role using the CLI, AWS CloudFormation or another mechanism, you would specify a trust policy directly.
+    **Note:** AWSロールタイプを選択すると、ロールの信頼ポリシーが自動的に作成され、AWSサービスがあなたの代わりにこのロールを引き受けることができます。CLI、AWS CloudFormationまたは別のメカニズムを使用してこのロールを作成する場合は、信頼ポリシーを直接指定します。
 
-1. Begin typing `AWSLambdaBasicExecutionRole` in the **Filter** text box and check the box next to that role.
+1. **検索**テキストボックスに`AWSLambdaBasicExecutionRole`と入力し、そのロールの横にあるチェックボックスをオンにします。
 
-1. Click **Next: Review**.
+1. **次のステップ: 確認** をクリックします。
 
-1. Enter `WildRydesLambda` for the **Role name**.
+1. **ロール名に**に`WildRydesLambda`。
 
-1. Choose **Create role**.
+1. **ロールの作成**　をクリックします。
 
-1. Type `WildRydesLambda` into the filter box on the Roles page and choose the role you just created.
+1. ロールのページで`WildRydesLambda`を検索ボックスに入力し、作成したロールを選択します。
 
-1. On the Permissions tab, choose the **Add inline policy** link in the lower right corner to create a new inline policy.
+1. アクセス権限のタブで, 右下にある**インラインポリシーの追加** を選択します。
     ![Inline policies screenshot](../images/inline-policies.png)
 
-1. Select **Choose a service**.
+1. **サービスの選択** をクリックします。
 
-1. Begin typing `DynamoDB` into the search box labeled **Find a service** and select **DynamoDB** when it appears.
+1.  **サービスの検索**に `DynamoDB` と入力し、表示された中から**DynamoDB** を選びます。
     ![Select policy service](../images/select-policy-service.png)
 
-1. Choose **Select actions**.
+1. **アクションの選択** をクリックします。
 
-1. Begin typing `PutItem` into the search box labeled **Filter actions** and check the box next to **PutItem** when it appears.
+1. **フィルタアクション**に `PutItem` と入力し、表示された中から **PutItem** を選びます。
 
-1. Select the **Resources** section.
+1. **リソース** セクションをクリックします。
 
-1. With the **Specific** option selected, choose the Add ARN link in the **table** section.
+1. **指定** オプションの選択をし, **テーブル** セクション中の`ARNの追加`リンクをクリックします。
 
-1. Paste the ARN of the table you created in the previous section in the **Specify ARN for table** field, and choose **Add**.
+1. 前のセクションで作成したテーブルのARNを**DynamoDB_table の ARN の指定**に貼り付け、**追加**を選択します。
 
-1. Choose **Review Policy**.
+1. **Review Policy** を選択します。
 
-1. Enter `DynamoDBWriteAccess` for the policy name and choose **Create policy**.
+1. 名前に`DynamoDBWriteAccess`を入力し、**Create policy** を選択します。
     ![Review Policy](../images/review-policy.png)
 
 </p></details>
 
-### 3. Create a Lambda Function for Handling Requests
+### 3. リクエストを処理するためのLambda関数を作成する
 
 #### Background
 
-AWS Lambda will run your code in response to events such as an HTTP request. In this step you'll build the core function that will process API requests from the web application to dispatch a unicorn. In the next module you'll use Amazon API Gateway to create a RESTful API that will expose an HTTP endpoint that can be invoked from your users' browsers. You'll then connect the Lambda function you create in this step to that API in order to create a fully functional backend for your web application.
+AWS Lambdaは、HTTPリクエストなどのイベントに応答してコードを実行します。このステップでは、ユニコーンを配送するためのWebアプリケーションからのAPIリクエストを処理するコア機能を構築します。次のモジュールでは、Amazon API Gatewayを使用して、ユーザーのブラウザから呼び出せるHTTPエンドポイントを公開するRESTful APIを作成します。このステップで作成したラムダ関数をそのAPIに接続して、Webアプリケーション用の完全な機能を持つバックエンドを作成します。
 
-#### High-Level Instructions
+#### 詳細な手順
 
-Use the AWS Lambda console to create a new Lambda function called `RequestUnicorn` that will process the API requests. Use the provided [requestUnicorn.js](requestUnicorn.js) example implementation for your function code. Just copy and paste from that file into the AWS Lambda console's editor.
+AWS Lambdaコンソールを使用して、APIリクエストを処理する「RequestUnicorn」という新しいラムダ関数を作成します。関数コードには、提供されている[requestUnicorn.js](requestUnicorn.js)の実装例を使用してください。そのファイルからコピーしてAWS Lambdaコンソールのエディタに貼り付けるだけです。
 
-Make sure to configure your function to use the `WildRydesLambda` IAM role you created in the previous section.
+前のセクションで作成した `WildRydesLambda` IAMロールを使用するように関数を設定してください。
 
 <details>
-<summary><strong>Step-by-step instructions (expand for details)</strong></summary><p>
+<summary><strong>ステップバイステップ手順 (詳細を展開)
+</strong></summary><p>
 
-1. Choose on **Services** then select **Lambda** in the Compute section.
+1. AWS マネージメントコンソールで **サービス** から コンピューティングの下にある **Lambda** を選択します。
 
-1. Click **Create function**.
+1. **関数の作成**をクリックします。
 
-1. Keep the default **Author from scratch** card selected.
+1. **一から作成** カードを選択します。
 
-1. Enter `RequestUnicorn` in the **Name** field.
+1. **名前** フィールドに`RequestUnicorn`を入力します。
 
-1. Select **Node.js 6.10** for the **Runtime**.
+1. **ランタイム**に**Node.js 6.10**を選択します。
 
-1. Ensure `Choose an existing role` is selected from the **Role** dropdown.
+1. **ロール** ドロップダウンに`既存のロールを選択` が選択されていることを確認します。
 
-1. Select `WildRydesLambda` from the **Existing Role** dropdown.
+1. **既存のロール** ドロップダウンから`WildRydesLambda`を選択します。
     ![Create Lambda function screenshot](../images/create-lambda-function.png)
 
-1. Click on **Create function**.
+1. **関数の作成**をクリックします。
 
-1. Scroll down to the **Function code** section and replace the exiting code in the **index.js** code editor with the contents of [requestUnicorn.js](requestUnicorn.js).
+1. **関数コード** セクションまでスクロールし、既存の**index.js** の内容を [requestUnicorn.js](requestUnicorn.js)で上書きします。
     ![Create Lambda function screenshot](../images/create-lambda-function-code.png)
 
-1. Click **"Save"** in the upper right corner of the page.
+1. ページの右上端にある**"保存"**をクリックします。
 
 </p></details>
 
-## Implementation Validation
+## 実装確認
 
-For this module you will test the function that you built using the AWS Lambda console. In the next module you will add a REST API with API Gateway so you can invoke your function from the browser-based application that you deployed in the first module.
+このモジュールでは、AWS Lambdaコンソールを使用して構築した関数をテストします。次のモジュールでは、APIゲートウェイを備えたREST APIを追加して、最初のモジュールでデプロイしたブラウザベースのアプリケーションから関数を呼び出すことができます。
 
-1. From the main edit screen for your function, select **Configure test event** from the the **Select a test event...** dropdown.
+1. 関数のメイン編集画面から、`テストイベントの選択...` ドロップダウンから**テストイベントの設定** を選択します。
     ![Configure test event](../images/configure-test-event.png)
 
-1. Keep **Create new test event** selected.
+1. **新しいテストイベントの作成**を選択します。
 
-1. Enter `TestRequestEvent` in the **Event name** field
+1. **イベント名** に `TestRequestEvent` を入力します。
 
-1. Copy and paste the following test event into the editor:
+1. 下記のテストイベントをエディターにコピーアンドペーストします:
 
     ```JSON
     {
@@ -176,13 +180,13 @@ For this module you will test the function that you built using the AWS Lambda c
 
     ![Configure test event](../images/configure-test-event-2.png)
 
-1. Click **Create**.
+1. **作成** をクリックします。
 
-1. On the main function edit screen click **Test** with `TestRequestEvent` selected in the dropdown.   
+1. 関数の編集画面で、ドロップダウンに`TestRequestEvent`が選択された状態で**テスト**をクリックします。
 
-1. Scroll to the top of the page and expand the **Details** section of the **Execution result** section.
+1. ページのトップにスクロールし、**実行結果** セクションの**詳細**を展開します。
 
-1. Verify that the execution succeeded and that the function result looks like the following:
+1. 実行が成功し、関数の結果が次のようになっていることを確認します。
 ```JSON
 {
     "statusCode": 201,
@@ -193,4 +197,4 @@ For this module you will test the function that you built using the AWS Lambda c
 }
 ```
 
-After you have successfully tested your new function using the Lambda console, you can move on to the next module, [RESTful APIs](../4_RESTfulAPIs).
+Lambdaコンソールを使って新しい関数を正常にテストしたら、次のモジュール[RESTful APIs](../ 4_RESTfulAPIs)に進むことができます。
