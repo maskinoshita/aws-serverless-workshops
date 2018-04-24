@@ -16,7 +16,7 @@ US East (N. Virginia) | [![Launch Module 1 in us-east-1](http://docs.aws.amazon.
 
 1. テンプレートの選択ページで **次へ** をクリックします。
 
-1. **Website Bucket Name** に `wildrydes-{{あなたの名前}}` のような世界で唯一の値を入力し、**次へ** をクリックします。
+1. **Website Bucket Name** に `wildrydes-USERNAME` のような世界で唯一の値を入力し、**次へ** をクリックします。
     ![Speficy Details Screenshot](../images/module1-cfn-specify-details.png)
 
 1. オプションページではすべてデフォルトのままで **次へ** をクリックします。
@@ -42,7 +42,7 @@ US East (N. Virginia) | [![Launch Module 1 in us-east-1](http://docs.aws.amazon.
 
 ![Static website architecture](../images/static-website-architecture.png)
 
-このモジュールでは、Amazon S3 WebサイトのエンドポイントURLを使用します。地域によっては、`http：// {your-bucket-name} .s3-website- {region} .amazonaws.com`または `bucket-name.s3-website.region.amazonaws.com`という形式があります。多くの実際のアプリケーションでは、カスタムドメインを使用してサイトをホストしたいと思うでしょう。 独自のドメインを使用することに興味がある場合は Amazon S3 ドキュメント内の [独自ドメインを使用して静的ウェブサイトをセットアップする](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html) をご参照ください。
+このモジュールでは、Amazon S3 WebサイトのエンドポイントURLを使用します。地域によっては、`http：//{your-bucket-name}.s3-website-{region}.amazonaws.com`または `bucket-name.s3-website.region.amazonaws.com`という形式があります。多くの実際のアプリケーションでは、カスタムドメインを使用してサイトをホストしたいと思うでしょう。 独自のドメインを使用することに興味がある場合は Amazon S3 ドキュメント内の [独自ドメインを使用して静的ウェブサイトをセットアップする](https://docs.aws.amazon.com/ja_jp/AmazonS3/latest/dev/website-hosting-custom-domain-walkthrough.html) をご参照ください。
 
 ## 実装手順
 
@@ -74,7 +74,7 @@ Amazon S3 は Web サーバーを構成または管理することなく、静�
 
 #### 詳細な手順
 
-コンソールまたはAWS CLIを使用してAmazon S3バケットを作成します。バケットの名前はすべての地域、顧客で全世界で唯一でなければならないことに注意してください。`wildrydes-firstname-lastname`のような名前を使用することをお勧めします。バケット名がすでに存在するというエラーが表示された場合は、未使用の名前が見つかるまで数字または文字を追加してみてください。
+コンソールまたはAWS CLIを使用してAmazon S3バケットを作成します。バケットの名前はすべての地域、顧客で全世界で唯一でなければならないことに注意してください。`wildrydes-USERNAME`のような名前を使用することをお勧めします。バケット名がすでに存在するというエラーが表示された場合は、未使用の名前が見つかるまで数字または文字を追加してみてください。
 
 <details>
 <summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
@@ -83,7 +83,7 @@ Amazon S3 は Web サーバーを構成または管理することなく、静�
 
 1. **+バケットを作成する** を選択します。
 
-1. `wildrydes-firstname-lastname`のような全世界で唯一の名前をバケット名に指定します。
+1. `wildrydes-USERNAME`のような全世界で唯一の名前をバケット名に指定します。
 
 1. このワークショップで利用するリージョンを選択します。
 
@@ -111,15 +111,9 @@ Amazon S3 は Web サーバーを構成または管理することなく、静�
 
 すでにCLIをインストール設定している場合は、それを使用して`s3://wildrydes-us-east-1/WebApplication/1_StaticWebHosting/website`から必要な Web アセットをバケットにコピーできます。
 
-前のセクションで使用したバケット名で `YOUR_BUCKET_NAME`を置き換え、バケットを作成したリージョンコード（例えばap-northeast-1）で` YOUR_BUKET_REGION`を置き換えて次のコマンドを実行します。
-
-ローカルのファイルを転送する場合:
+前のセクションで使用したバケット名で `YOUR_BUCKET_NAME`を置き換え、バケットを作成したリージョンコード（例えばap-northeast-1）で`YOUR_BUKET_REGION`を置き換えて次のコマンドを実行します。
 
     aws s3 sync aws-serverless-workshops/WebApplication/1_StaticWebHosting/website s3://YOUR_BUCKET_NAME --region YOUR_BUCKET_REGION
-
-S3上に用意されたテンプレートを転送する場合
-
-    aws s3 sync s3://wildrydes-us-east-1/WebApplication/1_StaticWebHosting/website s3://YOUR_BUCKET_NAME --region YOUR_BUCKET_REGION
 
 コマンドが成功した場合は、バケットにコピーされたオブジェクトのリストが表示されます。
 </p></details>

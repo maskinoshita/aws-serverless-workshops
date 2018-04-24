@@ -108,12 +108,13 @@ Amazon Cognitoコンソールで、ユーザープールを選択してから、
 
 ### 3. Webサイトのバケット内の`config.js`を更新する
 
- [/js/config.js](../1_StaticWebHosting/website/js/config.js) ファイルには、ユーザープールID、アプリケーションクライアントID、地域の設定が含まれています。前の手順で作成したユーザープールとアプリケーションの設定でこのファイルを更新し、ファイルをバケットにアップロードし直してください。
+ [/js/config.js](../1_StaticWebHosting/website/js/config.js) ファイルには、ユーザープールID、アプリケーションクライアントID、地域の設定が含まれています。前の手順で作成したユーザープールとアプリケーションの設定でこのファイルをCloud9で更新し、ファイルをバケットにアップロードし直してください(CLIで実行した`aws sync ...`を再度実行すればOK)。
 
 <details>
 <summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
-1. Webサイトディレクトリから [config.js](../1_StaticWebHosting/website/js/config.js) を開きます。
+1. de
+2. Webサイトディレクトリから [config.js](../1_StaticWebHosting/website/js/config.js) を開きます。
 
 1. `cognito`セクションを、作成したユーザープールとアプリケーションの正しい値で更新してください。
 

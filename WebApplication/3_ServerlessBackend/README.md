@@ -31,7 +31,7 @@ Amazon DynamoDBコンソールを使用して、新しいDynamoDBテーブルを
 
 1. **テーブルの作成**をクリックします。
 
-1. **テーブル名** に`Rides-USERNAME`を入力します。小文字／大文字は区別されます。
+1. **テーブル名** に`Rides-USERNAME`を入力します。小文字／大文字は区別されます。後で使用するのでメモしておいてください。
 
 1. **パーティションキー** に`RideId`を入力し、**文字列**をキータイプに設定します。小文字／大文字は区別されます。
 
@@ -138,6 +138,22 @@ AWS Lambdaコンソールを使用して、APIリクエストを処理する「R
 
 1. **関数コード** セクションまでスクロールし、既存の**index.js** の内容を [requestUnicorn.js](requestUnicorn.js)で上書きします。
     ![Create Lambda function screenshot](../images/create-lambda-function-code.png)
+
+1. 88行目付近にある`recordRide`の`Table`名を自身で作成したDynamoDBのテーブル名に変更します。
+```javascript
+function recordRide(rideId, username, unicorn) {
+    return ddb.put({
+        TableName: 'Rides-USERNAME',   // ここ！
+        Item: {
+            RideId: rideId,
+            User: username,
+            Unicorn: unicorn,
+            UnicornName: unicorn.Name,
+            RequestTime: new Date().toISOString(),
+        },
+    }).promise();
+}
+```
 
 1. ページの右上端にある**保存**をクリックします。
 
