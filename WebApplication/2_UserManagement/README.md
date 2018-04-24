@@ -113,8 +113,7 @@ Amazon Cognitoコンソールで、ユーザープールを選択してから、
 <details>
 <summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
-1. de
-2. Webサイトディレクトリから [config.js](../1_StaticWebHosting/website/js/config.js) を開きます。
+1. Webサイトディレクトリから [config.js](../1_StaticWebHosting/website/js/config.js) を開きます。
 
 1. `cognito`セクションを、作成したユーザープールとアプリケーションの正しい値で更新してください。
 
