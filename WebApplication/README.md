@@ -34,6 +34,8 @@ S3は、HTML、CSS、JavaScript、およびユーザーのブラウザに読み�
 
 このワークショップは複数のモジュールに分かれています。次の手順に進む前に各モジュールを完了する必要がありますが、モジュール1と2にはAWS CloudFormationテンプレートが用意されていますので、必要なリソースを手作業で作成しなくても起動できます。
 
+0. [First Setup](0_FirstSetup)
+
 1. [Static Web hosting](1_StaticWebHosting)
 2. [User Management](2_UserManagement)
 3. [Serverless Backend](3_ServerlessBackend)
