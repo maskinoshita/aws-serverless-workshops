@@ -6,6 +6,7 @@ custom:
   siteName: wildrydes-serverlessfw
   userPoolName: wildrydes-serverlessfw
   userPoolClientName: wildrydes-serverlessfw
+  authorizerName: wildrydes-serverlessfw
   dynamoTableName: wildrydes-serverlessfw
   s3Sync:
     - bucketName: ${self:custom.siteName}
@@ -22,26 +23,30 @@ provider:
     - Effect: "Allow"
       Action:
         - "dynamodb:PutItem"
-      Resource: { "Fn::GetAtt" : [ "DataTable", "Arn" ] }
+      Resource: { "Fn::GetAtt" : [ DataTable, Arn ] }
 
 package:
  include:
    - lambda/**
+ exclude:
+   - website/**
 
 functions:
   hello:
-    handler: requestUnicorn.handler
+    handler: lambda/requestUnicorn.handler
     events:
       # API Gateway の設定
       - http:
           path: ride
           method: post
+          cors: true
           integration: lambda
-          authorizer:
-            name:
-              arn: { "Fn::GetAtt" : [ "UserPool", "Arn" ] }
-              identitySource: method.request.header.Authorization
-              type: token
+          # authorizer:
+          #   arn: { "Fn::GetAtt" : [ "UserPool", "Arn" ] }
+          #   # name: ${self:custom.authorizerName}
+          #   # id: { "Ref": "UserPool" }
+          #   # identitySource: method.request.header.Authorization
+          #   # type: COGNITO_USER_POOLS
 
 resources:
  Resources:
@@ -80,9 +85,15 @@ resources:
       Type: AWS::DynamoDB::Table
       Properties:
         TableName: ${self:custom.dynamoTableName}
+        AttributeDefinitions:
+          - AttributeName: "RideId"
+            AttributeType: "S"
         KeySchema:
           - AttributeName: "RideId"
             KeyType: "HASH"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 5
+          WriteCapacityUnits: 5
     # Cognito ユーザープールの作成
     UserPool:
       Type: AWS::Cognito::UserPool
@@ -94,14 +105,25 @@ resources:
       Properties:
         ClientName: ${self:custom.userPoolClientName}
         GenerateSecret: false
-        UserPoolId: Fn::Ref UserPool
+        UserPoolId:
+          Ref: UserPool
  Outputs:
-    Website URL:
+    WebsiteURL:
       Description: "S3 Website URL"
-      Value: Fn::GetAtt WebsiteBucket.DomainName
+      Value:
+        "Fn::Join": [ "", [ "http://", { "Ref": "WebsiteBucket" }, ".s3-website-", "${self:provider.region}", ".amazonaws.com" ] ]
     UserPoolId:
       Description: "Cognito User Pool Name"
-      Value: Fn::Ref UserPool
+      Value:
+        Ref: UserPool
     UserPoolClientId:
       Description: "Cognito User Pool Client ID"
-      Value: Fn::Ref UserPoolClient
+      Value:
+        Ref: UserPoolClient
+    DynamoDBTableName:
+      Description: "DynamoDB Table Name"
+      Value: ${self:custom.dynamoTableName}
+    UserPoolArn:
+      Description: "Cognito User Pool Name"
+      Value:
+        "Fn::GetAtt" : [ UserPool, Arn ]
