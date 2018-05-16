@@ -77,6 +77,15 @@ Amazon S3 は Web サーバーを構成または管理することなく、静�
 コンソールまたはAWS CLIを使用してAmazon S3バケットを作成します。バケットの名前はすべての地域、顧客で全世界で唯一でなければならないことに注意してください。`wildrydes-USERNAME`のような名前を使用することをお勧めします。バケット名がすでに存在するというエラーが表示された場合は、未使用の名前が見つかるまで数字または文字を追加してみてください。
 
 <details>
+<summary><strong>CLI ステップバイステップ手順(詳細を展開)
+
+すでにCLIをインストール設定している場合は、それを使用してバケットを作成できます。`YOUR_BUCKET_NAME`を自分で決めた名前に、バケットを作成したいリージョンコード（例えばap-northeast-1）で` YOUR_BUKET_REGION`を置き換えて次のコマンドを実行します。
+
+    aws s3api create-bucket --bucket YOUR_BUKCET_NAME --region YOUR_BUCKET_REGION --create-bucket-configuration LocationConstraint=YOUR_BUCKET_REGION
+
+</p></details>
+
+<details>
 <summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
 1. AWS マネージメントコンソールで **サービス** から ストレージの下にある **S3** を選択します。
@@ -90,15 +99,6 @@ Amazon S3 は Web サーバーを構成または管理することなく、静�
 1. "既存のバケットから設定をコピー" を **選択せず**、ダイアログの左下にある **作成** を押します。
 
     ![Create bucket screenshot](../images/create-bucket.png)
-
-</p></details>
-
-<details>
-<summary><strong>CLI ステップバイステップ手順(詳細を展開)
-
-すでにCLIをインストール設定している場合は、それを使用してバケットを作成できます。`YOUR_BUCKET_NAME`を自分で決めた名前に、バケットを作成したいリージョンコード（例えばap-northeast-1）で` YOUR_BUKET_REGION`を置き換えて次のコマンドを実行します。
-
-    aws s3api create-bucket --bucket YOUR_BUKCET_NAME --region YOUR_BUCKET_REGION --create-bucket-configuration LocationConstraint=YOUR_BUCKET_REGION
 
 </p></details>
 
