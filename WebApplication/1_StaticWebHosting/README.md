@@ -163,6 +163,8 @@ US East (N. Virginia) | [![Launch Module 1 in us-east-1](http://docs.aws.amazon.
 <details>
 <summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
+1. AWS マネージメントコンソールで サービス から ストレージの下にある S3 を選択します。
+
 1. S3 コンソールで、 セクション1で自身が作成したバケットを選択します。
 
 1. **アクセス権限** タブから **Bucket Policy** を選択します。.
