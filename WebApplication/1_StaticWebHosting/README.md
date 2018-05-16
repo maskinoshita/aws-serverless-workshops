@@ -111,7 +111,7 @@ Amazon S3 は Web サーバーを構成または管理することなく、静�
 <details>
 <summary><strong>CLI ステップバイステップ手順(詳細を展開)</strong></summary><p>
 
-すでにCLIをインストール設定している場合は、それを使用して`s3://wildrydes-us-east-1/WebApplication/1_StaticWebHosting/website`から必要な Web アセットをバケットにコピーできます。
+CLIコマンドを使って、ローカルのファイルをS3のバケットにコピーします。
 
 前のセクションで使用したバケット名で `YOUR_BUCKET_NAME`を置き換え、バケットを作成したリージョンコード（例えばap-northeast-1）で`YOUR_BUKET_REGION`を置き換えて次のコマンドを実行します。
 
