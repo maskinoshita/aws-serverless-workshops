@@ -83,6 +83,8 @@ Amazon S3 は Web サーバーを構成または管理することなく、静�
 
     aws s3api create-bucket --bucket YOUR_BUKCET_NAME --region YOUR_BUCKET_REGION --create-bucket-configuration LocationConstraint=YOUR_BUCKET_REGION
 
+成功した場合、バケットのロケーションが表示されます。
+
 </p></details>
 
 <details>
