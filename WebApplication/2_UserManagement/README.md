@@ -113,7 +113,9 @@ Amazon Cognitoコンソールで、ユーザープールを選択してから、
 <details>
 <summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
-1. Webサイトディレクトリから [config.js](../1_StaticWebHosting/website/js/config.js) を開きます。
+1. Cloud9上でWebサイトディレクトリ中の [config.js](../1_StaticWebHosting/website/js/config.js) を開きます。
+
+    Webサイトディレクトリは、[1_StaticWebHosting](../1_StaticWebHosting/)にあります。
 
 1. `cognito`セクションを、作成したユーザープールとアプリケーションの正しい値で更新してください。
 
