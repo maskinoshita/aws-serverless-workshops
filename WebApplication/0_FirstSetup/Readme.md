@@ -17,6 +17,14 @@ https://console.aws.amazon.com/
 
 ![AWS_コンソール2](../images/aws_console_2.png)
 
+AWS コンソールの右上にあるリージョンの設定から**東京**(ap-northeast-1)を選択しておいてください。
+
+![AWS_コンソール3](../images/aws_console_3.png)
+
+コンソールのトップ画面の**AWS サービス**カード、または上部のナビゲーションの**サービス**から各種サービスにアクセスできることを確認しておいてください。
+
+![AWS_コンソール4](../images/aws_console_4.png)
+
 ## Cloud9へのログイン
 
 Chromeブラウザで新しいタブを開き、
@@ -38,6 +46,7 @@ git clone https://github.com/maskinoshita/aws-serverless-workshops.git
 ```
 
 ![AWS_Cloud9](../images/aws_cloud9_2.png)
+
 
 ## ワークショップの手順の確認
 
