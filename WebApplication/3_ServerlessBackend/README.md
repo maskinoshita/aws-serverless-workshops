@@ -111,7 +111,7 @@ AWS Lambdaは、HTTPリクエストなどのイベントに応答してコード
 
 #### 詳細な手順
 
-AWS Lambdaコンソールを使用して、APIリクエストを処理する「RequestUnicorn」という新しいラムダ関数を作成します。関数コードには、提供されている[requestUnicorn.js](requestUnicorn.js)の実装例を使用してください。そのファイルからコピーしてAWS Lambdaコンソールのエディタに貼り付けるだけです。
+AWS Lambdaコンソールを使用して、APIリクエストを処理する「RequestUnicorn」という新しいラムダ関数を作成します。関数コードには、提供されている[requestUnicorn.js](requestUnicorn.js)の実装例を使用してください。そのファイルからコピーしてAWS Lambdaコンソールのエディタに貼り付けるだけです。RequestUnicorn.jsは3_ServerlessBackendのディレクトリの中にあります。
 
 前のセクションで作成した `WildRydesLambda-USERNAME` IAMロールを使用するように関数を設定してください。
 
