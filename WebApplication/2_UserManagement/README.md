@@ -2,46 +2,13 @@
 
 このモジュールでは、ユーザーのアカウントを管理するAmazon Cognitoのユーザープールを作成します。顧客が新しいユーザーとして登録し、電子メールアドレスを確認し、サイトにサインインできるようにするページをデプロイします。
 
-このモジュールをスキップしたい場合は、必要なリソースを自動的に構築するために、CloudFormationテンプレートの1つを選択した地域で起動できます。
-
-Region| Launch
-------|-----
-Asia Pacific (Tokyo) | [![Launch Module 2 in ap-northeast-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-northeast-1#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-ap-northeast-1/WebApplication/2_UserManagement/user-management.yaml)
-US East (N. Virginia) | [![Launch Module 2 in us-east-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=wildrydes-webapp-2&templateURL=https://s3.amazonaws.com/wildrydes-us-east-1/WebApplication/2_UserManagement/user-management.yaml)
-
-<details>
-<summary><strong>CloudFormation Launch Instructions (expand for details)</strong></summary><p>
-
-1. 好みのリージョンの **Launch Stack** をクリックします。
-
-1. テンプレートの選択ページで **次へ** をクリックします。
-
-1. **Website Bucket Name** に モジュール１で入力した値(`wildrydes-{{あなたの名前}}` のような)を入力し、**次へ** をクリックします。
-
-    **Note:** 前のモジュールで使用したものと同じバケット名を指定する必要があります。存在しないか、書き込みアクセス権を持たないバケット名を指定すると、CloudFormationスタックは作成中に失敗します。
-
-    ![Speficy Details Screenshot](../images/module2-cfn-specify-details.png)
-
-1. オプションページではすべてデフォルトのままで **次へ** をクリックします。
-
-1. 確認ページでは "AWS CloudFormation によって IAM リソースが作成される場合があることを承認"のボックスを **チェック** し、 **作成** をクリックします。
-    ![Acknowledge IAM Screenshot](../images/cfn-ack-iam.png)
-
-    このテンプレートは、カスタムリソースを使用してAmazon Cognitoのユーザープールとクライアントを作成し、このユーザープールに接続してWebサイトのバケットにアップロードするのに必要な詳細を含む設定ファイルを生成します。テンプレートは、これらのリソースを作成し、設定ファイルをバケットにアップロードするためのアクセス権を提供するロールを作成します。
-
-1. `wildrydes-webapp-2` スタックが `CREATE_COMPLETE` ステータスに変わるまで待ちます。
-
-1.   次のモジュールに進む準備が整ったことを確認するには、[実装検証](#実装検証) セクションに記載されている手順に従ってください。
-
-</p></details>
-
 ## アーキテクチャ概要
 
 ユーザーがあなたのウェブサイトにアクセスすると、まず新しいユーザーアカウントを登録します。このワークショップでは、登録するために電子メールアドレスとパスワードを要求するだけです。ただし、Amazon Cognitoでは、独自のアプリケーションで追加の属性を要求するように設定できます。
 
-ユーザーが登録を送信すると、Amazon Cognitoは、提供されたアドレスに確認コード付きの確認メールを送信します。アカウントを確認するために、ユーザーはサイトに戻り、自分のメールアドレスと受信した確認コードを入力します。テスト用に偽の電子メールアドレスを使用する場合は、Amazon Cognitoコンソールを使用してユーザーアカウントを確認することもできます。
+ユーザーが登録を送信すると、Amazon Cognitoは、提供されたアドレスに確認コード付きの確認メールを送信します。アカウントを確認するために、ユーザーはサイトに戻り、自分のメールアドレスと受信した確認コードを入力します。テスト用にダミーの電子メールアドレスを使用する場合は、Amazon Cognitoコンソールを使用してユーザーアカウントを確認することもできます。
 
-ユーザーが確認済みのアカウントを持っている（電子メールの確認プロセスを使用するか、コンソールから手動で確認する）と、ユーザーはサインインできます。ユーザーがサインインする場合、ユーザー名（または電子メール）とパスワードが入力します。その後、JavaScript関数はAmazon Cognitoと通信し、Secure Remote Passwordプロトコル（SRP）を使用して認証し、一連のJSON Webトークン（JWT）を受信します。 JWTにはユーザーの身元に関する主張が含まれており、次のモジュールでAmazon API Gatewayで構築したRESTful APIに対して認証するために使用されます。
+ユーザーが確認済みのアカウントを持っている（電子メールの確認プロセスを使用するか、コンソールから手動で確認する）と、ユーザーはサインインできます。ユーザーがサインインする場合、ユーザー名（または電子メール）とパスワードが入力します。その後、JavaScript関数はAmazon Cognitoと通信し、Secure Remote Passwordプロトコル（SRP）を使用して認証し、一連のJSON Webトークン（JWT）を受信します。 JWTにはユーザーの身元に関する情報が含まれており、次のモジュールでAmazon API Gatewayで構築したRESTful APIに対して認証するために使用されます。
 
 ![Authentication architecture](../images/authentication-architecture.png)
 
@@ -49,9 +16,9 @@ US East (N. Virginia) | [![Launch Module 2 in us-east-1](http://docs.aws.amazon.
 
 以下の各セクションでは、実装の概要と詳細なステップバイステップの手順を説明します。
 
-AWS管理コンソールに精通している場合や、段階的な説明に従わずに自身でサービスを探索したい場合は、概要は実装を完了するのに十分な内容を提供しています。
+AWS管理コンソールに精通している場合や段階的な説明に従わずに自身でサービスを設定したい場合は、概要のみを参照して実装してください。
 
-最新バージョンのChrome、Firefox、SafariのWebブラウザを使用している場合は、セクションを展開するまで、ステップバイステップの手順は表示されません。
+最新バージョンのChrome、Firefox、SafariのWebブラウザを使用している場合は、セクションを展開するまで、ステップバイステップの手順は表示されません。詳細手順が必要な場合は、セクションをクリックし展開してください。
 
 ### 1. Amazon Cognito User Pool を作成する
 
@@ -64,7 +31,7 @@ Amazon Cognitoは、ユーザーを認証するための2つの異なるメカ�
 Amazon Cognitoコンソールを使用して、デフォルト設定を使用して新しいユーザープールを作成します。プールが作成されたら、プールIDをメモします。後のセクションでこの値を使用します。
 
 <details>
-<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary
+<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary>
 <p>
 
 1. AWS マネージメントコンソールで **サービス** から セキュリティ、 アイデンティティ、 コンプライアンスの下にある **Cognito** を選択します。
@@ -163,7 +130,7 @@ Amazon Cognitoコンソールで、ユーザープールを選択してから、
 
 1. 登録フォームに記入し、**Let's Ryde**を選択します。あなた自身の電子メールを使用するか、偽の電子メールを入力することができます。**少なくとも1つの大文字、数字、および特殊文字を含むパスワード**を選択してください。後で入力したパスワードを忘れないでください。ユーザーが作成されたことを確認するアラートが表示されます。
 
-1. 次の2つの方法のいずれかを使用して、新しいユーザーを確認します。
+1. 次の2つの方法の **いずれか** を使用して、新しいユーザーを確認します。
 
   1. 管理しているメールアドレスを使用している場合は、ウェブサイトドメインの下にある`/verify.html`にアクセスし、メールで送信された確認コードを入力してアカウント確認プロセスを完了できます。確認メールはスパムフォルダに保存される可能性があります。 実際のアプリケーションでは [SMS と E メール確認メッセージとユーザー招待メッセージのカスタマイズ](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/cognito-user-pool-settings-message-customizations.html)を使用して、所有するドメインからメールを送信します。
 

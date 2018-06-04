@@ -10,45 +10,14 @@
 
 このモジュールでは、APIのクラウドコンポーネントを構築するために必要なステップに焦点を当てますが、このAPIを呼び出すブラウザコードの仕組みに興味がある場合は、[ride.js](../1_StaticWebHosting/website/js/ride.js)ファイルを開きます。この場合、アプリケーションはjQueryの[ajax()](https://api.jquery.com/jQuery.ajax/)メソッドを使用してリモートリクエストを行います。
 
-モジュールをスキップしたい場合は、必要なリソースを自動的に構築するために、これらのAWS CloudFormationテンプレートの1つを選択した地域で起動できます。
-
-Region| Launch
-------|-----
-Asia Pacific (Tokyo) | [![Launch Module 4 in ap-northeast-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-northeast-1#/stacks/new?stackName=wildrydes-webapp-4&templateURL=https://s3.amazonaws.com/wildrydes-ap-northeast-1/WebApplication/4_RESTfulAPIs/backend-api.yaml)
-US East (N. Virginia) | [![Launch Module 4 in us-east-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=wildrydes-webapp-4&templateURL=https://s3.amazonaws.com/wildrydes-us-east-1/WebApplication/4_RESTfulAPIs/backend-api.yaml)
-<details>
-<summary><strong>CloudFormation Launch Instructions (expand for details)</strong></summary><p>
-
-1. Click the **Launch Stack** link above for the region of your choice.
-
-1. Click **Next** on the Select Template page.
-
-1. Provide the name of your website bucket from module 1 for the  **Website Bucket Name** (e.g. `wildrydes-yourname`) and choose **Next**.
-
-    **Note:** You must specify the same bucket name you used in the previous module. If you provide a bucket name that does not exist or that you do not have write access to, the CloudFormation stack will fail during creation.
-
-1. Provide the ARN for the User Pool we created in module 2. You can find the User Pool ARN in the [Amazon Cognito console](https://console.aws.amazon.com/cognito/users/).
-
-1. On the Options page, leave all the defaults and click **Next**.
-
-1. On the Review page, check the box to acknowledge that CloudFormation will create IAM resources and click **Create**.
-    ![Acknowledge IAM Screenshot](../images/cfn-ack-iam.png)
-
-    This template uses a custom resource to update the `/js/config.js` file with the new API endpoint URL
-
-1. Wait for the `wildrydes-webapp-4` stack to reach a status of `CREATE_COMPLETE`.
-
-1. Verify the Wild Rydes home page is loading properly and try to request a ride.
-
-</p></details>
 
 ## 実装手順
 
 以下の各セクションでは、実装の概要と詳細なステップバイステップの手順を説明します
 
-AWS管理コンソールに精通している場合や、段階的な説明に従わずに自身でサービスを探索したい場合は、概要は実装を完了するのに十分な内容を提供しています。
+AWS管理コンソールに精通している場合や段階的な説明に従わずに自身でサービスを設定したい場合は、概要のみを参照して実装してください。
 
-最新バージョンのChrome、Firefox、SafariのWebブラウザを使用している場合は、セクションを展開するまで、ステップバイステップの手順は表示されません。
+最新バージョンのChrome、Firefox、SafariのWebブラウザを使用している場合は、セクションを展開するまで、ステップバイステップの手順は表示されません。詳細手順が必要な場合は、セクションをクリックし展開してください。
 
 ### 1. 新しいREST APIを作成する
 

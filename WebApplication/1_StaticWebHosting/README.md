@@ -2,43 +2,9 @@
 
 このモジュールでは Web アプリケーションの静的リソースをホストするために Amazon Simple Storage Service (S3) を設定します. 以後のモジュールでは、JavaScriptを使用してこれらのページに動的機能を追加し、AWS LambdaとAmazon API Gatewayで構築されたRESTful APIを呼び出します。
 
-既にAmazon S3での作業に慣れている場合、またはLambdaとAPI Gatewayの作業を省略したい場合は、必要なリソースを自動的に構築するために、AWS CloudFormationテンプレートの1つを起動できます。
-
-Region| Launch
-------|-----
-Asia Pacific (Tokyo) | [![Launch Module 1 in ap-northeast-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-northeast-1#/stacks/new?stackName=wildrydes-webapp-1&templateURL=https://s3.amazonaws.com/wildrydes-ap-northeast-1/WebApplication/1_StaticWebHosting/webapp-static-hosting.yaml)
-US East (N. Virginia) | [![Launch Module 1 in us-east-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=wildrydes-webapp-1&templateURL=https://s3.amazonaws.com/wildrydes-us-east-1/WebApplication/1_StaticWebHosting/webapp-static-hosting.yaml)
-
-<details>
-<summary><strong>CloudFormation 起動手順 (詳細を展開)</strong></summary><p>
-
-1. 好みのリージョンの **Launch Stack** をクリックします。
-
-1. テンプレートの選択ページで **次へ** をクリックします。
-
-1. **Website Bucket Name** に `wildrydes-USERNAME` のような世界で唯一の値を入力し、**次へ** をクリックします。
-    ![Speficy Details Screenshot](../images/module1-cfn-specify-details.png)
-
-1. オプションページではすべてデフォルトのままで **次へ** をクリックします。
-
-1. 確認ページでは "AWS CloudFormation によって IAM リソースが作成される場合があることを承認"のボックスを **チェック** し、 **作成** をクリックします。
-
-    ![Acknowledge IAM Screenshot](../images/cfn-ack-iam.png)
-
-    このテンプレートでは、カスタムリソースを使用して静的なWebサイト資産を中央のS3バケットから独自の専用バケットにコピーします。カスタムリソースがアカウントの新しいバケットに書き込むためには、これらのアクセス許可を引き受けられるIAMロールを作成する必要があります。
-
-1. `wildrydes-webapp-1` スタックが `CREATE_COMPLETE` ステータスに変わるまで待ちます。
-
-1. `wildrydes-webapp-1` を選択し, **出力** タブをクリックして WebsiteURL のリンクをクリックします。
-
-1. Wild Rydes のホームページが正しく動作することを確認し、次のモジュールへ移動してください。 [User Management](../2_UserManagement).
-
-</p></details>
-
-
 ## アーキテクチャ概要
 
-このモジュールのアーキテクチャは非常に簡単です。 HTML、CSS、JavaScript、画像、その他のファイルを含む静的WebコンテンツはすべてAmazon S3に保存されます。エンドユーザーは、Amazon S3に公開されている公開WebサイトのURLを使用してサイトにアクセスします。サイトを利用可能にするために、Webサーバーを実行したり、他のサービスを使用する必要はありません。
+このモジュールのアーキテクチャは非常に単純です。 HTML、CSS、JavaScript、画像、その他のファイルを含む静的WebコンテンツはすべてAmazon S3に保存されます。エンドユーザーは、Amazon S3の公開WebサイトURLを使用してWebサイトにアクセスします。Webサイトを利用可能にするために、Webサーバーを実行したり他のサービスを使用する必要はありません。
 
 ![Static website architecture](../images/static-website-architecture.png)
 
@@ -48,9 +14,9 @@ US East (N. Virginia) | [![Launch Module 1 in us-east-1](http://docs.aws.amazon.
 
 以下の各セクションでは、実装の概要と詳細なステップバイステップの手順を説明します
 
-AWS管理コンソールに精通している場合や、段階的な説明に従わずに自身でサービスを探索したい場合は、概要は実装を完了するのに十分な内容を提供しています。
+AWS管理コンソールに精通している場合や段階的な説明に従わずに自身でサービスを設定したい場合は、概要のみを参照して実装してください。
 
-最新バージョンのChrome、Firefox、SafariのWebブラウザを使用している場合は、セクションを展開するまで、ステップバイステップの手順は表示されません。
+最新バージョンのChrome、Firefox、SafariのWebブラウザを使用している場合は、セクションを展開するまで、ステップバイステップの手順は表示されません。詳細手順が必要な場合は、セクションをクリックし展開してください。
 
 ### リージョンの選択
 
@@ -74,7 +40,9 @@ Amazon S3 は Web サーバーを構成または管理することなく、静�
 
 #### 詳細な手順
 
-コンソールまたはAWS CLIを使用してAmazon S3バケットを作成します。バケットの名前はすべての地域、顧客で全世界で唯一でなければならないことに注意してください。`wildrydes-USERNAME`のような名前を使用することをお勧めします。バケット名がすでに存在するというエラーが表示された場合は、未使用の名前が見つかるまで数字または文字を追加してみてください。
+コンソールまたはAWS CLIを使用してAmazon S3バケットを作成します。バケットの名前は全世界のすべての地域、顧客で唯一でなければならないことに注意してください。`wildrydes-USERNAME`のような名前を使用することをお勧めします。バケット名がすでに存在するというエラーが表示された場合は、未使用の名前が見つかるまで数字または文字を追加してみてください。
+
+ここでは、CLIとGUIによる方法を紹介していますが、CLI(コマンドライン)行う方法で実施してください。
 
 <details>
 <summary><strong>CLI ステップバイステップ手順(詳細を展開)</strong>
@@ -88,7 +56,7 @@ Amazon S3 は Web サーバーを構成または管理することなく、静�
 </p></details>
 
 <details>
-<summary><strong>ステップバイステップ手順 (詳細を展開)</strong></summary><p>
+<summary><strong>GUI ステップバイステップ手順 (詳細を展開)</strong></summary><p>
 
 1. AWS マネージメントコンソールで **サービス** から ストレージの下にある **S3** を選択します。
 
@@ -118,34 +86,6 @@ CLIコマンドを使って、ローカルのファイルをS3のバケットに
     aws s3 sync aws-serverless-workshops/WebApplication/1_StaticWebHosting/website s3://YOUR_BUCKET_NAME --region YOUR_BUCKET_REGION
 
 コマンドが成功した場合は、バケットにコピーされたオブジェクトのリストが表示されます。
-</p></details>
-
-<details>
-<summary><strong>CloudFormation ステップバイステップ手順 (詳細を展開)</strong></summary><p>
-
-上記のいずれの方法も使用できない場合は、必要なアセットをS3バケットにコピーするために、提供された CloudFormation テンプレートを起動することができます。
-
-Region| Launch
-------|-----
-Asia Pacific (Tokyo) | [![Launch Module 1 in ap-northeast-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=ap-northeast-1#/stacks/new?stackName=wildrydes-copy-objects&templateURL=https://s3.amazonaws.com/wildrydes-ap-northeast-1/WebApplication/1_StaticWebHosting/webapp-copy-objects.yaml)
-US East (N. Virginia) | [![Launch Module 1 in us-east-1](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/images/cloudformation-launch-stack-button.png)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=wildrydes-copy-objects&templateURL=https://s3.amazonaws.com/wildrydes-us-east-1/WebApplication/1_StaticWebHosting/webapp-copy-objects.yaml)
-
-1. Webサイト用のバケットを作成したリージョンの **Launch Stack** をクリックします。
-
-1. テンプレートの選択ページで **次へ** をクリックします。
-
-1. **Website Bucket Name** に 自分の S3 バケット名 (例えば、`wildrydes-yourname`) を入力し、**次へ** をクリックします。
-
-1. オプションページではすべてデフォルトのままで **次へ** をクリックします。
-
-1. 確認ページでは "AWS CloudFormation によって IAM リソースが作成される場合があることを承認"のボックスを **チェック** し、 **作成** をクリックします。
-
-    ![Acknowledge IAM Screenshot](../images/cfn-ack-iam.png)
-
-    このテンプレートでは、カスタムリソースを使用して静的なWebサイト資産を中央のS3バケットから独自の専用バケットにコピーします。カスタムリソースがアカウントの新しいバケットに書き込むためには、これらのアクセス許可を引き受けられるIAMロールを作成する必要があります。
-
-1. `wildrydes-copy-objects` スタックが `CREATE_COMPLETE` ステータスに変わるのを待ちます.
-
 </p></details>
 
 ### 3. パブリック読込を許可するバケットポリシーを追加する
