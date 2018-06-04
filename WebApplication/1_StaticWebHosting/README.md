@@ -166,6 +166,6 @@ CLIコマンドを使って、ローカルのファイルをS3のバケットに
 
 あなたの Web サイトのベース URL（セクション4のURLです）に、Web ブラウザで訪れてください。 Wild Rydes のホームページが表示されます。ベースURLを検索する必要がある場合は、S3コンソールにアクセスしてバケットを選択し、**[プロパティ]**タブの**Static website hosting**カードをクリックします。
 
-ページが正しく表示されたら (下のスクリーンショット), 次のモジュールに移動してください。 [User Management](../2_UserManagement).
+ページが正しく表示されたら (下のスクリーンショット), 次のモジュールに移動してください。 [2. User Management](../2_UserManagement).
 
 ![Wild Rydes homepage screenshot](../images/wildrydes-homepage.png)

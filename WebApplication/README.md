@@ -42,3 +42,13 @@ S3は、HTML、CSS、JavaScript、およびユーザーのブラウザに読み�
 4. [RESTful APIs](4_RESTfulAPIs)
 
 ワークショップを完了したら、[クリーンアップガイド](9_CleanUp)に従って作成されたすべてのリソースを削除できます。
+
+
+## Extra
+
+Module 1-4をサーバーレス用のフレームワークで実装したものです。
+
+0. Serverless Framework による実装
+
+https://github.com/maskinoshita/aws-serverless-workshop-serverlessfw
+

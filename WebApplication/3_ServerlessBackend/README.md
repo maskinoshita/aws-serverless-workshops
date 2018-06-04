@@ -211,4 +211,4 @@ function recordRide(rideId, username, unicorn) {
 }
 ```
 
-Lambdaコンソールを使って新しい関数を正常にテストしたら、次のモジュール[RESTful APIs](../4_RESTfulAPIs)に進むことができます。
+Lambdaコンソールを使って新しい関数を正常にテストしたら、次のモジュール[4. RESTful APIs](../4_RESTfulAPIs)に進むことができます。

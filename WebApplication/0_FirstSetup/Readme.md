@@ -56,4 +56,4 @@ README.mdによる内容確認は、GitHub上から参照するほうが正し�
 https://github.com/maskinoshita/aws-serverless-workshops.git
 
 
-AWS, AWS Cloud9へのログインができたら [StaticWebHosting](../1_StaticWebHosting) に進んでください。
+AWS, AWS Cloud9へのログインができたら [1. StaticWebHosting](../1_StaticWebHosting) に進んでください。
